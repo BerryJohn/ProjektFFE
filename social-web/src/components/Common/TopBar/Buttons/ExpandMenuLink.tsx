@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { Colors } from '../../../../styledHelpers/Colors';
 import { fontSize } from '../../../../styledHelpers/FontSizes';
@@ -23,17 +24,25 @@ const LinkSpan = styled.span`
     font-size: ${fontSize[14]};
 `;
 
+const CustomLink = styled(Link)`
+    text-decoration: none;
+`;
+
+
 interface ITitle{
     title: string;
     imgSrc: string;
+    linkTo: string;
 }
 
 export const ExpandMenuLink: FC<ITitle> = props =>{
     return(
-        <LinkBody>
-            <LinkImg src={props.imgSrc} />
-            <LinkSpan>{props.title}</LinkSpan>
-        </LinkBody>
+        <CustomLink to={props.linkTo}>
+            <LinkBody>
+                <LinkImg src={props.imgSrc} />
+                <LinkSpan>{props.title}</LinkSpan>
+            </LinkBody>
+        </CustomLink>
     );
 }
 

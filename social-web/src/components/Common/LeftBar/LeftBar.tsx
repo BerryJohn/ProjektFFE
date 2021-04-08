@@ -13,6 +13,7 @@ const Bar = styled.div`
     display:flex;
     flex-direction: column;
     align-items: center;
+    margin: 0px 5px;
 `;
 
 const Links = styled.div`

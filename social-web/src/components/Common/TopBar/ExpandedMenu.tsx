@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
@@ -52,19 +53,19 @@ export const ExpandedMenu: FC = () => {
             <SubMenuTitle>
                 Platform
             </SubMenuTitle>
-            <ExpandMenuLink title={"Home"} imgSrc={houseImg}/>
-            <ExpandMenuLink title={"Publications"} imgSrc={publicationsImg}/>
-            <ExpandMenuLink title={"People"} imgSrc={peopleImg}/>
-            <ExpandMenuLink title={"Entities"} imgSrc={entitiesImg}/>
-            <ExpandMenuLink title={"Administration"} imgSrc={administrationImg}/>
+            <ExpandMenuLink title={"Home"} imgSrc={houseImg} linkTo="/"/>
+            <ExpandMenuLink title={"Publications"} imgSrc={publicationsImg} linkTo="/publications"/>
+            <ExpandMenuLink title={"People"} imgSrc={peopleImg} linkTo="/people"/>
+            <ExpandMenuLink title={"Entities"} imgSrc={entitiesImg} linkTo="/entities"/>
+            <ExpandMenuLink title={"Administration"} imgSrc={administrationImg} linkTo="/administration"/>
             <SubMenuTitle>
                 Workspaces
             </SubMenuTitle>
-            <ExpandMenuLink title={"Client contract"} imgSrc={houseImg}/>
-            <ExpandMenuLink title={"Supplier contract"} imgSrc={houseImg}/>
-            <ExpandMenuLink title={"Corporate"} imgSrc={corporateImg}/>
-            <ExpandMenuLink title={"Group Norms"} imgSrc={houseImg}/>
-            <ExpandMenuLink title={"Real estate contracts"} imgSrc={houseImg}/>
+            <ExpandMenuLink title={"Client contract"} imgSrc={houseImg} linkTo="/clientContract"/>
+            <ExpandMenuLink title={"Supplier contract"} imgSrc={houseImg} linkTo="/supplierContract"/>
+            <ExpandMenuLink title={"Corporate"} imgSrc={corporateImg} linkTo="/corporate"/>
+            <ExpandMenuLink title={"Group Norms"} imgSrc={houseImg} linkTo="/groupNorms"/>
+            <ExpandMenuLink title={"Real estate contracts"} imgSrc={houseImg} linkTo="realEstateContracts"/>
         </MenuBody>
     );
 };

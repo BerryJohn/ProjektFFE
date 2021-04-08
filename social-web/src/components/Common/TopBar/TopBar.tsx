@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors'
 import useDropdown from 'react-dropdown-hook';
+import { Link } from 'react-router-dom';
 
 import logo from '../../../icons/gorillaLogo.png';
 
@@ -67,10 +68,11 @@ export const TopBar: FC = () => {
     return(
         <Bar>
             <LeftButtonSet>
-                <Logo>
-                    <LogoImage src={logo} />
-                </Logo>
-
+                <Link to='/'>
+                    <Logo>
+                        <LogoImage src={logo} />
+                    </Logo>
+                </Link>
                 <Menu ref={wrapperRef}>
                     <MenuHookButton onClick={menuHandler}>
                         <ExpandMenuButton />
