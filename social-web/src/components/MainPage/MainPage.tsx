@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
   } from 'react-router-dom';
-
 import styled from 'styled-components';
 
 import { TopBar } from '../Common/TopBar/TopBar';
@@ -24,7 +23,8 @@ const Content = styled.div`
 `;
 
 const Main = styled.div`
-    font-family: sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap');
+    font-family: 'Roboto', sans-serif;
 `;
 
 const PageContent = styled.div`
@@ -49,6 +49,12 @@ export const MainPage: FC = () => {
                                 <Ecosystem />
                             </Route>
                             <Route path="/entities">
+                                <Entities />
+                            </Route>
+                            <Route path="/people">
+                                <Entities />
+                            </Route>
+                            <Route path="/administration">
                                 <Entities />
                             </Route>
                         </Switch>

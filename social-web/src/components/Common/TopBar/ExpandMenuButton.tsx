@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { Route, Switch } from 'react-router-dom';
 
 import arrowDown from '../../../icons/arrow-down.svg'
 
@@ -32,8 +33,28 @@ export const ExpandMenuButton: FC = () => {
     return(
         <MenuButton>
             <Selector>
-                <ImageSelector src="./icons/house2.svg" alt="Current page image"/>
-                <PageName>Home</PageName>
+                <Switch>
+                    <Route path="/publications">
+                        <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
+                        <PageName>Publications</PageName>
+                    </Route>
+                    <Route path='/ecosystem'>
+                        <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
+                        <PageName>EcoSystem</PageName>
+                    </Route>
+                    <Route path='/entities'>
+                        <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
+                        <PageName>Entities</PageName>
+                    </Route>
+                    <Route path='/administration'>
+                        <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
+                        <PageName>Administration</PageName>
+                    </Route>
+                    <Route path='/'>
+                        <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
+                        <PageName>Home</PageName>
+                    </Route>
+                </Switch>
                 <img src={arrowDown} alt=""/>
             </Selector>
         </MenuButton>

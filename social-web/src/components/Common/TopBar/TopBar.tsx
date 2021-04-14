@@ -58,7 +58,7 @@ const Menu = styled.div`
     position:relative;
 `;
 
-export const TopBar: FC = () => {
+export const TopBar: FC = props => {
     const [wrapperRef, dropdownOpen, toggleDropdown, closeDropdown] = useDropdown();
     
     const menuHandler = () => {
