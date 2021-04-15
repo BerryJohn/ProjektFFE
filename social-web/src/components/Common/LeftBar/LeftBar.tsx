@@ -1,4 +1,9 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
+
+import { IState } from '../../../reducers';
+import { IUsersReducer } from '../../../reducers/userReducers';
+
 import styled from 'styled-components';
 
 import { Publications } from './LinksShortcut/Publications';
@@ -9,7 +14,6 @@ import { QuickUserInfo } from './QuickUserInfo';
 const Bar = styled.div`
     width:300px;
     height:500px;
-    /* background-color: red; */
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -23,14 +27,20 @@ const Links = styled.div`
 `;
 
 export const LeftBar: FC = () => {
+
+    const { usersList } = useSelector<IState, IUsersReducer>(globalState => ({
+        ...globalState.users
+    }));
+
     return(
-        <Bar>  
+        <Bar>
             <QuickUserInfo />
             <Links>
                 <Publications />
                 <EcoSystem />
                 <Entities />
             </Links>
+            {console.log({usersList})}  
         </Bar>
     );
 };

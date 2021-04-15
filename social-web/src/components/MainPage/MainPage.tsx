@@ -1,12 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
   } from 'react-router-dom';
-import styled from 'styled-components';
 
+import styled from 'styled-components';
 import { TopBar } from '../Common/TopBar/TopBar';
 import { LeftBar } from '../Common/LeftBar/LeftBar';
 import { Publications } from '../Publications/Publications';
@@ -14,6 +13,9 @@ import { Entities } from '../Entities/Entities';
 import { Ecosystem } from '../Ecosystem/Ecosystem';
 
 import { Colors } from '../../styledHelpers/Colors';
+
+import { useDispatch } from 'react-redux';
+import { getUsers } from '../../actions/userActions';
 
 const Content = styled.div`
     display:flex;
@@ -28,12 +30,20 @@ const Main = styled.div`
 `;
 
 const PageContent = styled.div`
-    background-color: green;
     width:100%;
     padding:15px;
 `;
 
+type GetUsers = ReturnType<typeof getUsers>
+
 export const MainPage: FC = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() =>{
+        dispatch<GetUsers>(getUsers());
+    }, []);
+    
     return(
         <Router>
             <Main>
