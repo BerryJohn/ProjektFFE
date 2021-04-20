@@ -48,7 +48,6 @@ export const LeftBar: FC = () => {
                 <EcoSystem />
                 <Entities />
             </Links>
-            {console.log({photoList})}  
         </Bar>
     );
 };

@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { Colors } from '../../../../styledHelpers/Colors';
 import { fontSize } from '../../../../styledHelpers/FontSizes';
 
-import { SubMenuTitle } from '../../../../styledHelpers/Components';
 import Links from './Links';
+import AccountExpand from './AccountExpand';
+import Logout from './Buttons/Logout';
 
 const MenuBody = styled.div`
     width:210px;
@@ -20,6 +21,7 @@ const MenuBody = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
+    padding:3px;
 `;
 
 const InputFilter = styled.input`
@@ -31,16 +33,10 @@ const InputFilter = styled.input`
     border:1px solid ${Colors.lightGray};
 `;
 
-const Account = styled.div`
-    width:100%;
-    height:200px;
-    border-top:1px solid ${Colors.lightGray};
-`;
 
 interface IExpMenu{
     closeMenu(): void;
 }
-
 
 export const ExpandedMenu: FC<IExpMenu> = props => {
 
@@ -52,11 +48,8 @@ export const ExpandedMenu: FC<IExpMenu> = props => {
         <MenuBody>
             <InputFilter placeholder='Filter...'/>
             <Links closeDropdown={closeDropMenu}/>
-            <Account>
-                <SubMenuTitle>
-                    Account
-                </SubMenuTitle>
-            </Account>
+            <AccountExpand closeDropdown={closeDropMenu}/>
+            <Logout />
         </MenuBody>
     );
 };

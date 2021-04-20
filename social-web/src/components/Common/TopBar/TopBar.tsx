@@ -16,6 +16,8 @@ import { HouseButton } from './Buttons/HouseButton';
 import { ExpandMenuButton } from './ExpandMenu/ExpandMenuButton';
 import { ExpandedMenu } from './ExpandMenu/ExpandedMenu';
 
+
+
 const Bar = styled.div`
     width:100vw;
     min-height:50px;
