@@ -48,3 +48,12 @@ export const UserShortcut = styled.div`
     cursor: pointer;
     /* position:relative; */
 `;
+
+export const SubMenuTitle = styled.span`
+    align-self:flex-start;
+    margin-left:3px;
+    color: ${Colors.gray};
+    font-weight:600;
+    font-size: ${fontSize[12]};
+    margin: 3px 6px;
+`;

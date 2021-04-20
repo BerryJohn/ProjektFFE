@@ -54,13 +54,20 @@ const UserShortcuts = styled.div`
     padding:5px;
 `;
 
-export const QuickUserInfo: FC = () => {
+interface ICurrentUser{
+    userName: string;
+    userCompany: string;
+    userAvatar: string; 
+}
+
+export const QuickUserInfo: FC<ICurrentUser> = props => {
     return(
         <UserBlock>
             <AboutUserInfo>
-                <UserAvatar src="https://static-cdn.jtvnw.net/jtv_user_pictures/61af75d0-a78c-4938-a02b-a7985f8c8a44-profile_image-300x300.png"/>
-                <UserName>Jamal Amrah</UserName>
-                <UserCompany>Job title - Company</UserCompany>
+                {/* <UserAvatar src="https://static-cdn.jtvnw.net/jtv_user_pictures/61af75d0-a78c-4938-a02b-a7985f8c8a44-profile_image-300x300.png"/> */}
+                <UserAvatar src={props.userAvatar}/>
+                <UserName>{props.userName}</UserName>
+                <UserCompany>{props.userCompany}</UserCompany>
             </AboutUserInfo>
             <UserShortcuts>
                 <UserNetwork />

@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 
-import arrowDown from '../../../icons/arrow-down.svg'
+import arrowDown from '../../../../icons/arrow-down.svg'
 
-import { Colors } from '../../../styledHelpers/Colors';
+import { Colors } from '../../../../styledHelpers/Colors';
 
 const MenuButton = styled.button`
     background-color: transparent;
@@ -13,7 +13,9 @@ const MenuButton = styled.button`
 `;
 
 const ImageSelector = styled.img`
-    margin-left:16px;
+    margin: 0px 10px;
+    width:25px;
+    height:25px;
 `;
 
 const Selector = styled.div`
@@ -35,19 +37,19 @@ export const ExpandMenuButton: FC = () => {
             <Selector>
                 <Switch>
                     <Route path="/publications">
-                        <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
+                        <ImageSelector src="./icons/publications.svg" alt="Current page image"/>               
                         <PageName>Publications</PageName>
                     </Route>
                     <Route path='/ecosystem'>
-                        <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
+                        <ImageSelector src="./icons/ecosystem.svg" alt="Current page image"/>               
                         <PageName>EcoSystem</PageName>
                     </Route>
                     <Route path='/entities'>
-                        <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
+                        <ImageSelector src="./icons/entities.svg" alt="Current page image"/>               
                         <PageName>Entities</PageName>
                     </Route>
                     <Route path='/administration'>
-                        <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
+                        <ImageSelector src="./icons/administration.svg" alt="Current page image"/>               
                         <PageName>Administration</PageName>
                     </Route>
                     <Route path='/'>

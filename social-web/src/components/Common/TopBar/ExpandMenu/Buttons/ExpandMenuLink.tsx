@@ -2,8 +2,8 @@ import React, {FC} from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { Colors } from '../../../../styledHelpers/Colors';
-import { fontSize } from '../../../../styledHelpers/FontSizes';
+import { Colors } from '../../../../../styledHelpers/Colors';
+import { fontSize } from '../../../../../styledHelpers/FontSizes';
 
 const LinkBody = styled.div`
     width:190px;
@@ -28,21 +28,29 @@ const CustomLink = styled(Link)`
     text-decoration: none;
 `;
 
+const InvisibleButton = styled.button`
+    background-color: transparent;
+    border:0px;
+    list-style: none outside none;
+`;
 
 interface ITitle{
     title: string;
     imgSrc: string;
     linkTo: string;
+    onClick(): void;
 }
 
 export const ExpandMenuLink: FC<ITitle> = props =>{
     return(
+    <InvisibleButton onClick={props.onClick}>        
         <CustomLink to={props.linkTo}>
             <LinkBody>
                 <LinkImg src={props.imgSrc} />
                 <LinkSpan>{props.title}</LinkSpan>
             </LinkBody>
         </CustomLink>
+    </InvisibleButton>
     );
 }
 

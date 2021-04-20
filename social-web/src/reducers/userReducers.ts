@@ -3,10 +3,12 @@ import * as actionTypes from '../actions/actionTypes/userTypes'
 
 export interface IUsersReducer {
     usersList: ISingleUser[];
+    currentUser: ISingleUser;
 }
 
 const defaultState = (): IUsersReducer => ({
-    usersList: []
+    usersList: [],
+    currentUser: undefined
 });
 
 export default (state = defaultState(), action: any) => {
@@ -15,10 +17,11 @@ export default (state = defaultState(), action: any) => {
             const payload: actionTypes.IUserTypes['GET_USERS'] = action;
             return{
                 ...state,
-                usersList: payload.usersList
+                    usersList: payload.data.usersList,
+                    currentUser: payload.data.usersList[0]
             }
         }
-        default: {
+        default:{
             return state;
         }
     }

@@ -16,6 +16,7 @@ import { Colors } from '../../styledHelpers/Colors';
 
 import { useDispatch } from 'react-redux';
 import { getUsers } from '../../actions/userActions';
+import { getPhotos } from '../../actions/photoActions';
 
 const Content = styled.div`
     display:flex;
@@ -34,7 +35,8 @@ const PageContent = styled.div`
     padding:15px;
 `;
 
-type GetUsers = ReturnType<typeof getUsers>
+type GetUsers = ReturnType<typeof getUsers>;
+type GetPhotos = ReturnType<typeof getPhotos>;
 
 export const MainPage: FC = () => {
 
@@ -42,6 +44,7 @@ export const MainPage: FC = () => {
 
     useEffect(() =>{
         dispatch<GetUsers>(getUsers());
+        dispatch<GetPhotos>(getPhotos());
     }, []);
     
     return(

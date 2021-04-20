@@ -11,6 +11,8 @@ import { EcoSystem } from './LinksShortcut/Ecosystem';
 import { Entities } from './LinksShortcut/Entities';
 import { QuickUserInfo } from './QuickUserInfo';
 
+import { IPhotosReducer } from '../../../reducers/photoReducers';
+
 const Bar = styled.div`
     width:300px;
     height:500px;
@@ -28,19 +30,25 @@ const Links = styled.div`
 
 export const LeftBar: FC = () => {
 
-    const { usersList } = useSelector<IState, IUsersReducer>(globalState => ({
-        ...globalState.users
+    const { usersList, photoList, currentUser } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState => ({
+        ...globalState.users,
+        ...globalState.photos,
     }));
+
+    // const { photoList } = useSelector<IState, IPhotosReducer>(globalState => ({
+    //     ...globalState.photos
+    // }));
+
 
     return(
         <Bar>
-            <QuickUserInfo />
+            <QuickUserInfo userAvatar={photoList[currentUser?.id]?.url} userName={usersList[0]?.name} userCompany={usersList[0]?.company.name}/>
             <Links>
                 <Publications />
                 <EcoSystem />
                 <Entities />
             </Links>
-            {console.log({usersList})}  
+            {console.log({photoList})}  
         </Bar>
     );
 };

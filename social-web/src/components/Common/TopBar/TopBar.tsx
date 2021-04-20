@@ -5,13 +5,16 @@ import useDropdown from 'react-dropdown-hook';
 import { Link } from 'react-router-dom';
 
 import logo from '../../../icons/gorillaLogo.png';
+import commentsImg from '../../../icons/comments.svg';
+import bellImg from '../../../icons/bell.svg';
 
 import { SearchBar } from '../TopBar/SearchBar';
-import { NotifyButtonComments } from './Buttons/NotifyButtonComments';
-import { NotifyButtonBell } from './Buttons/NotifyButtonBell';
+
+import { RoundButton } from './Buttons/RoundButton';
 import { HouseButton } from './Buttons/HouseButton';
-import { ExpandMenuButton } from './ExpandMenuButton';
-import { ExpandedMenu } from './ExpandedMenu';
+
+import { ExpandMenuButton } from './ExpandMenu/ExpandMenuButton';
+import { ExpandedMenu } from './ExpandMenu/ExpandedMenu';
 
 const Bar = styled.div`
     width:100vw;
@@ -64,6 +67,9 @@ export const TopBar: FC = props => {
     const menuHandler = () => {
         toggleDropdown();
     };
+    const closeDropMenu = () => {
+        closeDropdown();
+    }
     
     return(
         <Bar>
@@ -77,17 +83,14 @@ export const TopBar: FC = props => {
                     <MenuHookButton onClick={menuHandler}>
                         <ExpandMenuButton />
                     </MenuHookButton>
-                    {dropdownOpen &&
-                        <ExpandedMenu />
-                    }
+                    {dropdownOpen && <ExpandedMenu closeMenu={closeDropMenu}/>}
                 </Menu>
-
             </LeftButtonSet>
             <SearchBar />
             <RightButtonSet>
                 <HouseButton />
-                <NotifyButtonComments />
-                <NotifyButtonBell />
+                <RoundButton image={commentsImg} altText="Check your comments!"/>
+                <RoundButton image={bellImg} altText="Check your notifications!"/>
             </RightButtonSet>
         </Bar>
     );
