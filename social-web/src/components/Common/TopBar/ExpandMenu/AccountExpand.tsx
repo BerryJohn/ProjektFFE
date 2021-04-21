@@ -10,9 +10,7 @@ import ExpandMenuLink from './Buttons/ExpandMenuLink';
 import settingsImg from '../../../../icons/settings.svg'
 import privacyImg from '../../../../icons/privacy.svg'
 
-interface ILinks{
-    closeDropdown(): void;
-}
+import { ISingleUser } from '../../../../entities/users';
 
 const Account = styled.div`
     width:100%;
@@ -46,7 +44,13 @@ const AccountInfo = styled.div`
     border-top:1px solid ${Colors.lightGray};
 `;
 
-export const AccountExpand: FC<ILinks> = (props) => {
+interface IAccountExpand{
+    closeDropdown(): void;
+    currentUser: ISingleUser;
+    userPhoto: string;
+}
+
+export const AccountExpand: FC<IAccountExpand> = (props) => {
     
     const closeDropMenu = () => {
         props.closeDropdown ();
@@ -58,9 +62,9 @@ export const AccountExpand: FC<ILinks> = (props) => {
                 Account
             </SubMenuTitle>
             <Account>
-                <UserAvatar />
+                <UserAvatar src={props.userPhoto}/>
                 <UserInfo>
-                    <span>Janusz Pawlacz</span>
+                    <span>{props.currentUser.name}</span>
                     <UserLink>See more</UserLink>
                 </UserInfo>
             </Account>

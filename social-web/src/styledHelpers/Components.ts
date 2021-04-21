@@ -20,6 +20,7 @@ export const CircleNotify = styled.div`
     display:flex;
     justify-content:center;
     align-items:center;
+    position:relative;
 `;
 
 export const LeftBarLink = styled.div`

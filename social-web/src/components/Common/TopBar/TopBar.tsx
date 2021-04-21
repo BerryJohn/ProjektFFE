@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors'
 import useDropdown from 'react-dropdown-hook';
 import { Link } from 'react-router-dom';
+
+import styled from 'styled-components';
+import { Colors } from '../../../styledHelpers/Colors'
 
 import logo from '../../../icons/gorillaLogo.png';
 import commentsImg from '../../../icons/comments.svg';
@@ -15,6 +16,11 @@ import { HouseButton } from './Buttons/HouseButton';
 
 import { ExpandMenuButton } from './ExpandMenu/ExpandMenuButton';
 import { ExpandedMenu } from './ExpandMenu/ExpandedMenu';
+
+import { useSelector } from 'react-redux';
+import { IState } from '../../../reducers';
+import { IUsersReducer } from '../../../reducers/userReducers';
+import { IPhotosReducer } from '../../../reducers/photoReducers';
 
 
 
@@ -64,6 +70,12 @@ const Menu = styled.div`
 `;
 
 export const TopBar: FC = props => {
+
+    const { usersList, photoList, currentUser } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState => ({
+        ...globalState.users,
+        ...globalState.photos,
+    }));
+
     const [wrapperRef, dropdownOpen, toggleDropdown, closeDropdown] = useDropdown();
     
     const menuHandler = () => {
@@ -85,14 +97,14 @@ export const TopBar: FC = props => {
                     <MenuHookButton onClick={menuHandler}>
                         <ExpandMenuButton />
                     </MenuHookButton>
-                    {dropdownOpen && <ExpandedMenu closeMenu={closeDropMenu}/>}
+                    {dropdownOpen && <ExpandedMenu closeMenu={closeDropMenu} userPhoto={photoList[currentUser?.id]?.url} currentUser={currentUser}/>}
                 </Menu>
             </LeftButtonSet>
             <SearchBar />
             <RightButtonSet>
                 <HouseButton />
-                <RoundButton image={commentsImg} altText="Check your comments!"/>
-                <RoundButton image={bellImg} altText="Check your notifications!"/>
+                <RoundButton image={commentsImg} altText="Check your comments!" notifyCount="41"/>
+                <RoundButton image={bellImg} altText="Check your notifications!" notifyCount="3"/>
             </RightButtonSet>
         </Bar>
     );

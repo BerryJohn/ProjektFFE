@@ -9,6 +9,8 @@ import Links from './Links';
 import AccountExpand from './AccountExpand';
 import Logout from './Buttons/Logout';
 
+import { ISingleUser } from '../../../../entities/users';
+
 const MenuBody = styled.div`
     width:210px;
     height:auto;
@@ -36,6 +38,8 @@ const InputFilter = styled.input`
 
 interface IExpMenu{
     closeMenu(): void;
+    currentUser: ISingleUser;
+    userPhoto: string;
 }
 
 export const ExpandedMenu: FC<IExpMenu> = props => {
@@ -48,7 +52,7 @@ export const ExpandedMenu: FC<IExpMenu> = props => {
         <MenuBody>
             <InputFilter placeholder='Filter...'/>
             <Links closeDropdown={closeDropMenu}/>
-            <AccountExpand closeDropdown={closeDropMenu}/>
+            <AccountExpand closeDropdown={closeDropMenu} currentUser={props.currentUser} userPhoto={props.userPhoto}/>
             <Logout />
         </MenuBody>
     );
