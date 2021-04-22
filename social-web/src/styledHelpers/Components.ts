@@ -57,4 +57,5 @@ export const SubMenuTitle = styled.span`
     font-weight:600;
     font-size: ${fontSize[12]};
     margin: 3px 6px;
+    display:block;
 `;

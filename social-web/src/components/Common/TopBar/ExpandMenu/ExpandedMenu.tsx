@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -44,15 +44,20 @@ interface IExpMenu{
 
 export const ExpandedMenu: FC<IExpMenu> = props => {
 
+    const [inputText, setInputText] = useState<string>('');
+
+    const inputChangeHandler = (e: any) => {
+        setInputText((e.target.value as string).trim().toLocaleLowerCase());
+    }
     const closeDropMenu = () => {
         props.closeMenu();
     }
 
     return(
         <MenuBody>
-            <InputFilter placeholder='Filter...'/>
-            <Links closeDropdown={closeDropMenu}/>
-            <AccountExpand closeDropdown={closeDropMenu} currentUser={props.currentUser} userPhoto={props.userPhoto}/>
+            <InputFilter placeholder='Filter...' onChange={inputChangeHandler}/>
+            <Links closeDropdown={closeDropMenu} filterValue={inputText}/>
+            <AccountExpand closeDropdown={closeDropMenu} currentUser={props?.currentUser} userPhoto={props?.userPhoto}/>
             <Logout />
         </MenuBody>
     );

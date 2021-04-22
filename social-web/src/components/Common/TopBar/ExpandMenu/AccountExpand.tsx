@@ -62,9 +62,9 @@ export const AccountExpand: FC<IAccountExpand> = (props) => {
                 Account
             </SubMenuTitle>
             <Account>
-                <UserAvatar src={props.userPhoto}/>
+                <UserAvatar src={props?.userPhoto}/>
                 <UserInfo>
-                    <span>{props.currentUser.name}</span>
+                    <span>{props?.currentUser?.name}</span>
                     <UserLink>See more</UserLink>
                 </UserInfo>
             </Account>
