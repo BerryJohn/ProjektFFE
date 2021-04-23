@@ -22,7 +22,6 @@ const AddNetwork = styled.div`
     align-items:center;
     justify-content:center;
     box-shadow: 1px 1px 1px ${Colors.lightGray};
-    /* position:relative; */
     right:0px;
     transition:.1s;
     &:hover{
@@ -30,12 +29,19 @@ const AddNetwork = styled.div`
     }
 `;
 
+const LeftText = styled.div`
+    width:180px;
+    display:flex;
+    align-items:center;
+`;
 
 export const UserNetwork: FC = () => {
     return(
         <UserShortcut>
+            <LeftText>
             <NetworkImage src={networkImg}/>
             Your network
+            </LeftText>
             <AddNetwork>
                 <img src={publicationButtonImg}/>
             </AddNetwork>

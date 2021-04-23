@@ -14,7 +14,7 @@ import { QuickUserInfo } from './QuickUserInfo';
 import { IPhotosReducer } from '../../../reducers/photoReducers';
 
 const Bar = styled.div`
-    width:300px;
+    width:400px;
     height:500px;
     display:flex;
     flex-direction: column;
@@ -25,7 +25,7 @@ const Bar = styled.div`
 const Links = styled.div`
     display:flex;
     flex-direction: column;
-    width:200px;
+    width:210px;
 `;
 
 export const LeftBar: FC = () => {

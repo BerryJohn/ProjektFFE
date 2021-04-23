@@ -32,13 +32,11 @@ export const Links: FC<ILinks> = (props) => {
     const closeDropMenu = () => {
         props.closeDropdown ();
     }
-    
-    console.log(props.filterValue);
+
     return(
         <LinksBody>
-                <SubMenuTitle>
-                    Platform
-                </SubMenuTitle>
+                {props.filterValue.length == 0 &&
+                <SubMenuTitle> Platform </SubMenuTitle>}
                 {'home'.includes(props.filterValue) &&
                 <ExpandMenuLink onClick={closeDropMenu}  title={"Home"} imgSrc={houseImg} linkTo="/"/>}
                 {'publications'.includes(props.filterValue) &&
@@ -49,9 +47,8 @@ export const Links: FC<ILinks> = (props) => {
                 <ExpandMenuLink onClick={closeDropMenu}  title={"Entities"} imgSrc={entitiesImg} linkTo="/entities"/>}
                 {'administration'.includes(props.filterValue) &&
                 <ExpandMenuLink onClick={closeDropMenu}  title={"Administration"} imgSrc={administrationImg} linkTo="/administration"/>}
-                <SubMenuTitle>
-                    Workspaces
-                </SubMenuTitle>
+                {props.filterValue.length == 0 &&
+                <SubMenuTitle> Workspaces</SubMenuTitle>}
                 {'client contract'.includes(props.filterValue) &&
                 <ExpandMenuLink onClick={closeDropMenu}  title={"Client contract"} imgSrc={houseImg} linkTo="/clientContract"/>}
                 {'supplier contract'.includes(props.filterValue) &&

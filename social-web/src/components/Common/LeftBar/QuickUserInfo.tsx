@@ -50,6 +50,7 @@ const UserShortcuts = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
+    justify-content:flex-end;
     height:80px;
     padding:5px;
 `;

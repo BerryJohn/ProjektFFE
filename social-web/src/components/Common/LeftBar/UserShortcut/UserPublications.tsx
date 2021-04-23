@@ -28,11 +28,19 @@ const AddPublication = styled.div`
     }
 `;
 
+const LeftText = styled.div`
+    width:180px;
+    display:flex;
+    align-items:center;
+`;
+
 export const UserPublications: FC = () => {
     return(
         <UserShortcut>
-            <PublicationImage src={publicationsImg}/>
-            Your Publications
+            <LeftText>
+                <PublicationImage src={publicationsImg}/>
+                Your Publications
+            </LeftText>
             <AddPublication>
                 <img src={publicationButtonImg}/>
             </AddPublication>

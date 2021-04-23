@@ -17,6 +17,7 @@ import { Colors } from '../../styledHelpers/Colors';
 import { useDispatch } from 'react-redux';
 import { getUsers } from '../../actions/userActions';
 import { getPhotos } from '../../actions/photoActions';
+import { Home } from '../Home/Home';
 
 const Content = styled.div`
     display:flex;
@@ -69,6 +70,9 @@ export const MainPage: FC = () => {
                             </Route>
                             <Route path="/administration">
                                 <Entities />
+                            </Route>
+                            <Route path="/">
+                                <Home />
                             </Route>
                         </Switch>
                     </PageContent>

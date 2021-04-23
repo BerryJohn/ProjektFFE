@@ -42,12 +42,12 @@ export const UserShortcut = styled.div`
     height:30px;
     display:flex;
     align-items:center;
+    justify-content:space-evenly;
     width:220px;
     display:flex;
     align-items:center;
     color: ${Colors.darkBlue};
     cursor: pointer;
-    /* position:relative; */
 `;
 
 export const SubMenuTitle = styled.span`

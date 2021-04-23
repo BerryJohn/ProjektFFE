@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {ChangeEvent, FC, useState} from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -46,7 +46,7 @@ export const ExpandedMenu: FC<IExpMenu> = props => {
 
     const [inputText, setInputText] = useState<string>('');
 
-    const inputChangeHandler = (e: any) => {
+    const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setInputText((e.target.value as string).trim().toLocaleLowerCase());
     }
     const closeDropMenu = () => {
