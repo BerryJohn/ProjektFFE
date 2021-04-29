@@ -6,7 +6,6 @@ export const Home: FC = () =>{
     return(
         <>
             <LatestPublications/>
-            murzyn
         </>
     );
 }

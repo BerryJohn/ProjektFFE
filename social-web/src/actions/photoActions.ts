@@ -7,7 +7,6 @@ export const getPhotos = (): Promise<ISinglePhoto[]> => ((dispatch: Dispatch) =>
     return fetch('https://jsonplaceholder.typicode.com/photos')
         .then(res => res.json())
         .then((data: ISinglePhoto[]) =>{
-            console.log({data});
             dispatch({
                 type: actionTypes.GET_PHOTOS,
                 photoList: data

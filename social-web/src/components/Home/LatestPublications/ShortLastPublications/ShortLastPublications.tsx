@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import styled from 'styled-components';
+import { IPost } from '../../../../entities/posts';
 
 import { Colors } from '../../../../styledHelpers/Colors';
 import { fontSize } from '../../../../styledHelpers/FontSizes';
@@ -27,15 +28,37 @@ const MorePublications = styled.div`
     font-size: ${fontSize[18]};
 `;
 
-export const ShortLastPublications: FC = () =>{
+const Shorts = styled.div`
+    min-height:226px;
+`;
+
+interface ILastPublications{
+    publications: IPost[];
+}
+
+const postDefaultPhoto:string = 'https://thumbs.dreamstime.com/b/frustrated-stressed-male-book-writer-frustrated-stressed-male-writer-sitting-laptop-writing-book-117750236.jpg';
+
+export const ShortLastPublications: FC<ILastPublications> = (props) =>{
     return(
         <Container>
             <Title>
                 Latest publications
             </Title>
-            <ShortPublication postImage="https://i.ytimg.com/vi/jb5UfnZj68Q/maxresdefault.jpg" date="21.07.2021" userId={2137} title="Pasewelek klatwa ciesiela "/>
-            <ShortPublication postImage="https://i.ytimg.com/vi/jb5UfnZj68Q/maxresdefault.jpg" date="21.07.2021" userId={2137} title="Pasewelek klatwa ciesiela "/>
-            <ShortPublication postImage="https://i.ytimg.com/vi/jb5UfnZj68Q/maxresdefault.jpg" date="21.07.2021" userId={2137} title="Pasewelek klatwa ciesiela "/>
+            <Shorts>
+                <ShortPublication postImage={postDefaultPhoto} 
+                                date="21.07.2021" 
+                                userId={props.publications[0]?.userId} 
+                                title={props.publications[0]?.title}/>
+                                
+                <ShortPublication postImage={postDefaultPhoto} 
+                                date="21.07.2021" 
+                                userId={props.publications[1]?.userId} 
+                                title={props.publications[1]?.title}/>
+                <ShortPublication postImage={postDefaultPhoto} 
+                              date="21.07.2021" 
+                              userId={props.publications[2]?.userId} 
+                              title={props.publications[2]?.title}/>
+            </Shorts>
             <MorePublications>See more publications</MorePublications>
         </Container>
     );

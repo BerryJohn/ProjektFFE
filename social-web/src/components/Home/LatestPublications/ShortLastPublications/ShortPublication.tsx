@@ -1,6 +1,10 @@
 import React, {FC} from 'react';
+import { useSelector } from 'react-redux';
 
 import styled from 'styled-components';
+import { IState } from '../../../../reducers';
+import { IPhotosReducer } from '../../../../reducers/photoReducers';
+import { IUsersReducer } from '../../../../reducers/userReducers';
 import { Colors } from '../../../../styledHelpers/Colors';
 import { fontSize } from '../../../../styledHelpers/FontSizes';
 
@@ -18,6 +22,7 @@ const PostImage = styled.img`
     width:70px;
     height:70px;
     border-radius:2px;
+    object-fit: cover;
 `;
 
 const PostContent = styled.div`
@@ -63,6 +68,13 @@ interface IShortPublication{
 }
 
 export const ShortPublication: FC<IShortPublication> = (props) =>{
+    
+    const { usersList, photoList, currentUser} = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState => ({
+        ...globalState.users,
+        ...globalState.photos,
+    }));
+
+
     return(
         <Container>
             <PostImage src={props?.postImage}/>
@@ -72,8 +84,9 @@ export const ShortPublication: FC<IShortPublication> = (props) =>{
                 </PostTitle>
                 <PostUserInfo>
                     <PostDate>{props?.date}</PostDate>
-                    <UserAvatar src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cfa5a4e4-997b-44d5-81dc-1d68b360d374/de75ve0-bda32f61-67d4-4af8-93ff-a00073b07d26.png/v1/fill/w_899,h_889,q_70,strp/demonzz_by_avihlo_de75ve0-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD04OTAiLCJwYXRoIjoiXC9mXC9jZmE1YTRlNC05OTdiLTQ0ZDUtODFkYy0xZDY4YjM2MGQzNzRcL2RlNzV2ZTAtYmRhMzJmNjEtNjdkNC00YWY4LTkzZmYtYTAwMDczYjA3ZDI2LnBuZyIsIndpZHRoIjoiPD05MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.m7YRvTKoR7oqReM5ToBABw6mIQXbXcdnpsHNFgfyuBs"></UserAvatar>
-                    <UserName>John Doe</UserName>
+                    <UserAvatar src={photoList[props?.userId - 1]?.url}></UserAvatar>
+                    <UserName>{usersList[props?.userId - 1]?.name}</UserName> 
+                    {/* -1 because for instance ID 10 is over array */}
                 </PostUserInfo>
             </PostContent>
         </Container>

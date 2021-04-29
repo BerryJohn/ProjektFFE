@@ -19,17 +19,7 @@ const LogoutButton = styled.button`
     border-top:1px solid ${Colors.lightGray};
     cursor: pointer;
 `;
-
-// interface IExpMenu{
-//     closeMenu(): void;
-// }
-
 export const Logout: FC = props => {
-
-    // const closeDropMenu = () => {
-    //     props.closeMenu();
-    // }
-
     return(
         <LogoutButton>
             <img src={logoutImg}></img>

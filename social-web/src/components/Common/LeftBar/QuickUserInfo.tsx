@@ -9,7 +9,8 @@ import { UserPublications } from './UserShortcut/UserPublications';
 
 const UserBlock = styled.div`
     width:250px;
-    height: 200px;
+    min-height: 200px;
+    max-height: 250px;
     background-color: ${Colors.white};
     margin-top:10px;
     border-radius: 5px;
@@ -51,7 +52,7 @@ const UserShortcuts = styled.div`
     flex-direction:column;
     align-items:center;
     justify-content:flex-end;
-    height:80px;
+    height:60px;
     padding:5px;
 `;
 
