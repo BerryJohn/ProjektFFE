@@ -46,19 +46,13 @@ export const ShortLastPublications: FC<ILastPublications> = (props) =>{
                 Latest publications
             </Title>
             <Shorts>
-                <ShortPublication postImage={postDefaultPhoto} 
-                                date="21.07.2021" 
-                                userId={props.publications[0]?.userId} 
-                                title={props.publications[0]?.title}/>
-                                
-                <ShortPublication postImage={postDefaultPhoto} 
-                                date="21.07.2021" 
-                                userId={props.publications[1]?.userId} 
-                                title={props.publications[1]?.title}/>
-                <ShortPublication postImage={postDefaultPhoto} 
-                              date="21.07.2021" 
-                              userId={props.publications[2]?.userId} 
-                              title={props.publications[2]?.title}/>
+                {props.publications.map((el,index) => (
+                    <ShortPublication key={index}
+                    postImage={postDefaultPhoto} 
+                    date="21.07.2021" 
+                    userId={el?.userId} 
+                    title={el?.title}/>
+                ))}
             </Shorts>
             <MorePublications>See more publications</MorePublications>
         </Container>

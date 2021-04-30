@@ -62,26 +62,16 @@ export const Slider: FC<ISlider> = (props) =>{
             spaceBetween={5}
             navigation
             pagination={{ clickable: true }}
-            autoplay={{delay: 3000}}
-            >
-                <SwiperSlide>
-                <Slide postImage={postDefaultPhoto} 
+            autoplay={{delay: 3000}}>   
+
+            {props.publications.map((el,index) => 
+                (<SwiperSlide>
+                <Slide  key={index}
+                        postImage={postDefaultPhoto} 
                         date="21.07.2021" 
-                        userId={props.publications[0]?.userId} 
-                        title={props.publications[0]?.title} ></Slide>            
-                </SwiperSlide>  
-                <SwiperSlide>
-                <Slide postImage={postDefaultPhoto} 
-                           date="21.07.2021" 
-                           userId={props.publications[1]?.userId} 
-                           title={props.publications[1]?.title} ></Slide>            
-                </SwiperSlide>  
-                <SwiperSlide>
-                <Slide postImage={postDefaultPhoto} 
-                           date="21.07.2021" 
-                           userId={props.publications[2]?.userId} 
-                           title={props.publications[2]?.title} ></Slide>            
-                </SwiperSlide>   
+                        userId={el?.userId} 
+                        title={el?.title} ></Slide>            
+                </SwiperSlide>))}            
             </Swiper>
         </Containter>
     );
