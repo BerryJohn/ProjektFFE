@@ -21,16 +21,14 @@ const Container = styled.div`
     box-shadow: 0px 0px 3px ${Colors.lightGray};
 `;
 
+
 export const LatestPublications: FC = () =>{
 
-    const { usersList, photoList, currentUser, postList } = useSelector<IState, IUsersReducer & IPhotosReducer & IPostReducer>(globalState => ({
-        ...globalState.users,
-        ...globalState.photos,
+    const {postList } = useSelector<IState, IPostReducer>(globalState => ({
         ...globalState.posts,
     }));
 
     const threePublications: IPost[] = [];
-
     for(let i = 0; i<3; i++)
     {
         const random = Math.floor(Math.random() * 99);  
@@ -39,7 +37,7 @@ export const LatestPublications: FC = () =>{
 
     return(
         <Container>
-            <Slider />
+            <Slider publications={threePublications}/>
             <ShortLastPublications publications={threePublications}/>
         </Container>
     );

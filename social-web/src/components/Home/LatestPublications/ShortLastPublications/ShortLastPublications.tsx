@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+
 import styled from 'styled-components';
 import { IPost } from '../../../../entities/posts';
 
@@ -32,7 +33,7 @@ const Shorts = styled.div`
     min-height:226px;
 `;
 
-interface ILastPublications{
+export interface ILastPublications{
     publications: IPost[];
 }
 

@@ -69,11 +69,11 @@ interface IShortPublication{
 
 export const ShortPublication: FC<IShortPublication> = (props) =>{
     
-    const { usersList, photoList, currentUser} = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState => ({
+    const { usersList, photoList} = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState => ({
         ...globalState.users,
         ...globalState.photos,
     }));
-
+    
 
     return(
         <Container>
