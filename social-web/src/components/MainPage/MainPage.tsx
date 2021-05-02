@@ -20,11 +20,12 @@ import { getPhotos } from '../../actions/photoActions';
 import { getPosts } from '../../actions/postActions';
 
 import { Home } from '../Home/Home';
+import { getComments } from '../../actions/commentActions';
 const Content = styled.div`
     display:flex;
     /* flex-direction:column; */
     background-color: ${Colors.lightBackground};
-    height:calc(100vh - 50px); //50px - topbar
+    min-height:calc(100vh - 50px); //50px - topbar
 `;
 
 const Main = styled.div`
@@ -40,6 +41,7 @@ const PageContent = styled.div`
 type GetUsers = ReturnType<typeof getUsers>;
 type GetPhotos = ReturnType<typeof getPhotos>;
 type GetPosts = ReturnType<typeof getPosts>;
+type GetComments = ReturnType<typeof getComments>;
 
 export const MainPage: FC = () => {
 
@@ -49,6 +51,7 @@ export const MainPage: FC = () => {
         dispatch<GetUsers>(getUsers());
         dispatch<GetPhotos>(getPhotos());
         dispatch<GetPosts>(getPosts());
+        dispatch<GetComments>(getComments());
     }, []);
     
     return(
