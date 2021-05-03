@@ -31,6 +31,7 @@ const Content = styled.div`
 const Main = styled.div`
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap');
     font-family: 'Roboto', sans-serif;
+    overflow-x:hidden;
 `;
 
 const PageContent = styled.div`

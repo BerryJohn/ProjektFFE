@@ -9,11 +9,10 @@ import 'swiper/swiper.scss';
 
 const Containter = styled.div`
     width:1000px;
-    height: 250px;
 `;
 
 const CustomSwiper = styled(Swiper)`
-    height:250px;
+    height:225px;
 `;
 
 export const WorkspaceContainer: FC = () =>{

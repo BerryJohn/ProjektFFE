@@ -5,8 +5,6 @@ import WorkspaceContainter from './WorkspaceContainer/WorkspaceContainer';
 
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
-import AllPosts from '../AllPosts/AllPosts';
-
 
 const Title = styled.h1`
     font-size: ${fontSize[20]};
@@ -19,8 +17,6 @@ export const Workspaces: FC = () =>{
         <>
             <Title>Workspaces</Title>
             <WorkspaceContainter/>
-            <Title>Resume your work</Title>
-            <AllPosts/>
         </>
     );
 }
