@@ -38,7 +38,7 @@ export const LeftBar: FC = () => {
     
     return(
         <Bar>
-            <QuickUserInfo userAvatar={photoList[currentUser?.id]?.url} userName={usersList[0]?.name} userCompany={usersList[0]?.company.name}/>
+            <QuickUserInfo userAvatar={photoList?.filter(el => el?.id === currentUser?.id)[0]?.url} userName={currentUser?.name} userCompany={currentUser?.company?.name}/>
             <Links>
                 <Publications />
                 <EcoSystem />

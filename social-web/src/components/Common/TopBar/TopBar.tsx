@@ -97,7 +97,7 @@ export const TopBar: FC = props => {
                     <MenuHookButton onClick={menuHandler}>
                         <ExpandMenuButton />
                     </MenuHookButton>
-                    {dropdownOpen && <ExpandedMenu closeMenu={closeDropMenu} userPhoto={photoList[currentUser?.id]?.url} currentUser={currentUser}/>}
+                    {dropdownOpen && <ExpandedMenu closeMenu={closeDropMenu} userPhoto={photoList?.filter(el => el?.id === currentUser?.id)[0]?.url} currentUser={currentUser}/>}
                 </Menu>
             </LeftButtonSet>
             <SearchBar />

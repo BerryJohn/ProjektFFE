@@ -21,8 +21,10 @@ import { getPosts } from '../../actions/postActions';
 
 import { Home } from '../Home/Home';
 import { getComments } from '../../actions/commentActions';
+import { Profile } from '../Profile/Profile';
 const Content = styled.div`
     display:flex;
+    justify-content:center;
     /* flex-direction:column; */
     background-color: ${Colors.lightBackground};
     min-height:calc(100vh - 50px); //50px - topbar
@@ -77,6 +79,9 @@ export const MainPage: FC = () => {
                             </Route>
                             <Route path="/administration">
                                 <Entities />
+                            </Route>
+                            <Route path="/profile">
+                                <Profile />
                             </Route>
                             <Route path="/">
                                 <Home />

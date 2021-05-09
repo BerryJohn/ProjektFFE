@@ -52,6 +52,10 @@ export const ExpandMenuButton: FC = () => {
                         <ImageSelector src="./icons/administration.svg" alt="Current page image"/>               
                         <PageName>Administration</PageName>
                     </Route>
+                    <Route path='/profile'>
+                        <ImageSelector src="./icons/settings.svg" alt="Current page image"/>               
+                        <PageName>Profile</PageName>
+                    </Route>
                     <Route path='/'>
                         <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
                         <PageName>Home</PageName>

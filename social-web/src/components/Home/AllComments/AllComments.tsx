@@ -74,6 +74,7 @@ export const AllComments: FC = () =>{
             {pages[currentPage]?.map( (e:IComment,index:number) => 
                 (<SingleComment text={e.body} title={e.name} postId={e.postId} key={index}/>)
             )}
+
             <PageSelector>
                 <CustomButton onClick={
                     () => currentPage > 0 

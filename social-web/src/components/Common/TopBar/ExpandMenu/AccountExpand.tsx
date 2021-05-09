@@ -23,7 +23,6 @@ const UserAvatar = styled.img`
     width:30px;
     height:30px;
     border-radius:30px;
-    background-color:black;
     margin: 0px 10px;
 `;
 
@@ -69,7 +68,7 @@ export const AccountExpand: FC<IAccountExpand> = (props) => {
                 </UserInfo>
             </Account>
             <ExpandMenuLink title="Privacy" imgSrc={privacyImg} linkTo="/" onClick={closeDropMenu}></ExpandMenuLink>
-            <ExpandMenuLink title="Settings" imgSrc={settingsImg} linkTo="/" onClick={closeDropMenu}></ExpandMenuLink>
+                <ExpandMenuLink title="Settings" imgSrc={settingsImg} linkTo="/profile" onClick={closeDropMenu}></ExpandMenuLink>
         </AccountInfo>
     );
 };
