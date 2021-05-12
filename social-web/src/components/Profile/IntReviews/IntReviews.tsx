@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
+import Table from './Table';
 
 
 const Wrapper = styled.div`
@@ -15,10 +16,15 @@ const Title = styled.div`
     margin-top:5px;
 `;
 
-export const IntReviews: FC = () =>{
+interface IIntReviews{
+    isEditable: boolean;
+}
+
+export const IntReviews: FC<IIntReviews> = (props) =>{
     return(
         <Wrapper>
             <Title>Internal reviews</Title>
+            <Table isEditable={props?.isEditable}/>
         </Wrapper>
     );
 };

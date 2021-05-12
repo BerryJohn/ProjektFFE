@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
-import Table from '../Fees/Table';
+import Table from './Table';
 
 
 const Wrapper = styled.div`
@@ -16,11 +16,16 @@ const Title = styled.div`
     margin-top:5px;
 `;
 
-export const Proposals: FC = () =>{
+interface IProposals{
+    isEditable: boolean;
+}
+
+export const Proposals: FC<IProposals> = (props) =>{
+
     return(
         <Wrapper>
             <Title>Proposals</Title>
-            <Table />
+            <Table isEditable={props.isEditable}/>
         </Wrapper>
     );
 };

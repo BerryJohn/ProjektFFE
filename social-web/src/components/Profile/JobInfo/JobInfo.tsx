@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
 import house from '../../../icons/house.svg';
+import Correspondant from './Correspondant';
+import { IUsersReducer } from '../../../reducers/userReducers';
+import { ISingleUser } from '../../../entities/users';
 
 const Wrapper = styled.div`
     width:1000px;
@@ -40,27 +43,22 @@ const AttachImg = styled.img`
     margin:0px 10px;
 `;
 
-const Correspondant = styled.div`
-    width: 600px;
-    height:30px;
-    background-color:${Colors.lightGray};
-    display:flex;
-    align-items:center;
-    font-size:${fontSize[14]};
-    margin-top:5px;
-`;
-
 interface IJobInfo{
     isEditable: boolean;
+    users: ISingleUser[];
 }
 
 export const JobInfo: FC<IJobInfo> = (props) =>{
 
     const [data, setData] = useState({
-        salary: '640$',
+        salary: '640',
+        currency: '$',
+        negociated: true,
         terms: 'Montly 10kPLN retainer - see with Polek',
         file: 'xD.png',
-        services: 'Corparate with Harnaś and internal tatras'
+        services: 'Corparate with Harnaś and internal tatras',
+        userOneID: '2',
+        userTwoID: '3',
     });
 
     return(
@@ -69,8 +67,18 @@ export const JobInfo: FC<IJobInfo> = (props) =>{
             <SmallTitle>Hourly fee</SmallTitle>
             <Text>
                 {
-                !props?.isEditable ? (`${data?.salary}/day (Negociated)`)
-                            :(<input type='text' value={data?.salary} onChange={e => setData({...data, salary: e.target.value})}/>)
+                !props?.isEditable ? (`${data?.salary}${data?.currency}/day ${data?.negociated ? '(Negociated)' : '(Non-negotiable)'}`)
+                            :(<>
+                                <input type='text' value={data?.salary} onChange={e => setData({...data, salary: e.target.value})}/>
+                                <select onChange={e => setData({...data, currency: e.target.value})}>
+                                    <option value="">Select</option>
+                                    <option value="PLN">PLN</option>
+                                    <option value="$">$</option>
+                                    <option value="€">€</option>
+                                    <option value="£">£</option>
+                                </select>
+                                <input type='checkbox' checked={data?.negociated} onChange={e => setData({...data, negociated: e.target.checked})}/>(Negociated)
+                            </>)
                 }  
             </Text>
             <SmallTitle>Terms & conditions</SmallTitle>
@@ -94,8 +102,32 @@ export const JobInfo: FC<IJobInfo> = (props) =>{
                 }  
             </Text>
             <Title>Internal Correspondants</Title>
-            <Correspondant />
-            <Correspondant />
+            {
+                !props?.isEditable ? (<Correspondant userId={data?.userOneID}/>) 
+                :(
+                    <>
+                        <select onChange={e => setData({...data, userOneID: e.target.value})}>
+                            <option>Select</option>
+                            {props?.users.map((el,index) => 
+                                (<option key={index} value={el.id}>{el.name}</option>)
+                            )}
+                        </select>
+                    </>
+                )
+            }
+            {
+                !props?.isEditable ? (<Correspondant userId={data?.userTwoID}/>) 
+                :(
+                    <>
+                        <select onChange={e => setData({...data, userTwoID: e.target.value})}>
+                            <option>Select</option>
+                            {props?.users.map((el,index) => 
+                                (<option key={index} value={el.id}>{el.name}</option>)
+                            )}
+                        </select>
+                    </>
+                )
+            }
         </Wrapper>
     );
 };

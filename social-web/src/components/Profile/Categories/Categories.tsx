@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import { Colors } from '../../../styledHelpers/Colors';
+import countries from '../../../tools/countries';
 import Category from './Category';
 
 const Wrapper = styled.div`
@@ -24,7 +25,18 @@ const CatContainter = styled.div`
     flex-wrap:wrap;
 `;
 
-export const Categories: FC = () =>{
+interface ICategories{
+    isEditable?: boolean;
+}
+
+
+export const Categories: FC<ICategories> = (props) =>{
+    
+    const [data, setData] = useState({
+        country: 'Niger',
+        practiseLaw: 'Yes',
+    });
+    
     return(
         <Wrapper>
             <Title>Expertise</Title>
@@ -38,11 +50,26 @@ export const Categories: FC = () =>{
             </CatContainter>
             <Title>Admission to practise law</Title>
             <CatContainter>
-                <Category text="Yes"/>
+                {!props.isEditable 
+                    ? <Category text={data?.practiseLaw}/>
+                    :
+                    <select onChange={e => setData({...data, practiseLaw: e.target.value})}>
+                        <option>Select</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                }
             </CatContainter>
             <Title>Countries</Title>
             <CatContainter>
-                <Category text="POLSKA GUROM"/>
+                {!props.isEditable 
+                    ? <Category text={data?.country}/>
+                    :
+                    <select onChange={e => setData({...data, country: e.target.value})}>
+                        <option>Select</option>
+                        {countries.map(el => (<option>{el}</option>))}
+                    </select>
+                }
             </CatContainter>
         </Wrapper>
     );

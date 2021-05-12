@@ -31,7 +31,7 @@ const EditButton = styled.button`
     border:none;
     cursor: pointer;
     right:15px;
-    top:70px;
+    top:140px;
 `;
 const ButtonImg = styled.img`
     width:20px;
@@ -41,7 +41,7 @@ const ButtonImg = styled.img`
 
 export const Profile: FC = () =>{
 
-    const { currentUser, photoList } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState =>({
+    const { usersList, currentUser, photoList } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState =>({
         ...globalState.users,
         ...globalState.photos
     }));
@@ -61,11 +61,11 @@ export const Profile: FC = () =>{
                         avatar={photoList?.filter(el => el?.id === currentUser?.id)[0]?.url}
                         />
             <EditButton onClick={() => handleSubmit()}><ButtonImg src={pen}/></EditButton>
-            <Categories />
-            <JobInfo isEditable={isEdit}/>
-            <Proposals/>
-            <IntReviews/>
-            <Fees />
+            <Categories isEditable={isEdit}/>
+            <JobInfo isEditable={isEdit} users={usersList}/>
+            <Proposals isEditable={isEdit}/>
+            <IntReviews isEditable={isEdit}/>
+            <Fees isEditable={isEdit}/>
         </Wrapper>
     );
 };
