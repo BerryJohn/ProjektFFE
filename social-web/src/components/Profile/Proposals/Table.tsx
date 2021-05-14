@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
-import DatePicker from 'react-date-picker';
+import { CustomInput } from '../../../styledHelpers/Components';
 
 
 const Wrapper = styled.div`
@@ -11,11 +11,12 @@ const Wrapper = styled.div`
 
 const Headers = styled.div`
     display:flex;
+    border-bottom:1px solid ${Colors.lightGray};
 `;
 
 const Header = styled.div`
     width: calc(1000px / 6);
-    font-size: ${fontSize[20]};
+    font-size: ${fontSize[18]};
     padding:10px;
 `;
 
@@ -41,11 +42,6 @@ const Row = styled.div`
     overflow: hidden;
     white-space: nowrap;
 `;
-
-const CustomInput = styled.input`
-    width:100px;
-`;
-
 interface ITable{
     isEditable: boolean;
 }
@@ -104,6 +100,7 @@ export const Table: FC<ITable> = (props) =>{
                         }}></CustomInput>))}
                 </Column>
                 <Column>
+
                 {!props.isEditable ?
                         data.entity.map(el => (<Row>{el.value}</Row>)) :
                         data.entity.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{

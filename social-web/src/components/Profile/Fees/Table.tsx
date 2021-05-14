@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
 import DatePicker from 'react-date-picker';
-
+import { CustomInput } from '../../../styledHelpers/Components';
 
 const Wrapper = styled.div`
     width:100%;
@@ -11,11 +11,13 @@ const Wrapper = styled.div`
 
 const Headers = styled.div`
     display:flex;
+    border-bottom:1px solid ${Colors.lightGray};
+    padding:10px;
 `;
 
 const Header = styled.div`
-    width: calc(1000px / 5);
-    font-size: ${fontSize[20]};
+    width: calc(1000px / 4);
+    font-size: ${fontSize[18]};
     padding:10px;
 `;
 
@@ -24,7 +26,7 @@ const Data = styled.div`
 `;
 
 const Column = styled.div`
-    width: calc(1000px / 5);
+    width: calc(1000px / 4);
     padding:10px;
     display:flex;
     flex-direction:column;
@@ -39,10 +41,6 @@ const Row = styled.div`
     text-overflow:ellipsis;
     overflow: hidden;
     white-space: nowrap;
-`;
-
-const CustomInput = styled.input`
-    width:100px;
 `;
 
 interface ITable{

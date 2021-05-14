@@ -2,10 +2,12 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
-import house from '../../../icons/house.svg';
+import file from '../../../icons/file.svg';
 import Correspondant from './Correspondant';
 import { IUsersReducer } from '../../../reducers/userReducers';
 import { ISingleUser } from '../../../entities/users';
+import { IState } from '../../../reducers';
+import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`
     width:1000px;
@@ -28,7 +30,7 @@ const Text = styled.div`
     margin-top:10px;
 `;
 const AttachCV = styled.div`
-    width: 600px;
+    width: 550px;
     height:30px;
     background-color:${Colors.lightGray};
     display:flex;
@@ -43,12 +45,42 @@ const AttachImg = styled.img`
     margin:0px 10px;
 `;
 
+const CustomSelect = styled.select`
+    height:25px;
+    max-width:170px;
+    outline:none;
+    box-sizing:border-box;
+    padding:3px;
+    border:1px solid ${Colors.lightGray};
+    border-radius:2px;
+`;
+const CustomInput = styled.input`
+    height:25px;
+    outline:none;
+    box-sizing:border-box;
+    padding:3px;
+    border:1px solid ${Colors.lightGray};
+    border-radius:2px;
+`;
+
+const CustomSelectUsers = styled(CustomSelect)`
+    margin-top:5px;
+`;
+
+const ColumnInputs = styled.div`
+    display:flex;
+    flex-direction:column;
+`;
+
 interface IJobInfo{
     isEditable: boolean;
-    users: ISingleUser[];
 }
 
 export const JobInfo: FC<IJobInfo> = (props) =>{
+
+    const { usersList} = useSelector<IState, IUsersReducer>(globalState =>({
+        ...globalState.users,
+    }));
 
     const [data, setData] = useState({
         salary: '640',
@@ -69,15 +101,14 @@ export const JobInfo: FC<IJobInfo> = (props) =>{
                 {
                 !props?.isEditable ? (`${data?.salary}${data?.currency}/day ${data?.negociated ? '(Negociated)' : '(Non-negotiable)'}`)
                             :(<>
-                                <input type='text' value={data?.salary} onChange={e => setData({...data, salary: e.target.value})}/>
-                                <select onChange={e => setData({...data, currency: e.target.value})}>
-                                    <option value="">Select</option>
-                                    <option value="PLN">PLN</option>
-                                    <option value="$">$</option>
-                                    <option value="€">€</option>
-                                    <option value="£">£</option>
-                                </select>
-                                <input type='checkbox' checked={data?.negociated} onChange={e => setData({...data, negociated: e.target.checked})}/>(Negociated)
+                                <CustomInput type='text' value={data?.salary} onChange={e => setData({...data, salary: e.target.value})}/>
+                                <CustomSelect value={data?.currency} onChange={e => setData({...data, currency: e.target.value})}>
+                                    <option>PLN</option>
+                                    <option>$</option>
+                                    <option>€</option>
+                                    <option>£</option>
+                                </CustomSelect>
+                                <CustomInput type='checkbox' checked={data?.negociated} onChange={e => setData({...data, negociated: e.target.checked})}/>(Negociated)
                             </>)
                 }  
             </Text>
@@ -85,10 +116,10 @@ export const JobInfo: FC<IJobInfo> = (props) =>{
             <Text>
                 {
                 !props?.isEditable ? data?.terms
-                            :(<input type='text' value={data?.terms} onChange={e => setData({...data, terms: e.target.value})}/>)
+                            :(<CustomInput type='text' value={data?.terms} onChange={e => setData({...data, terms: e.target.value})}/>)
                 }  
             </Text>
-            <AttachCV><AttachImg src={house}/>
+            <AttachCV><AttachImg src={file}/>
                 {
                 !props?.isEditable ? data?.file
                             :(<input type='file' onChange={e => setData({...data, file:  e.target.files[0].name as string})}/>)
@@ -98,7 +129,7 @@ export const JobInfo: FC<IJobInfo> = (props) =>{
             <Text>
                 {
                 !props?.isEditable ? data?.services
-                            :(<input type='text' value={data?.services} onChange={e => setData({...data, services: e.target.value})}/>)
+                            :(<CustomInput type='text' value={data?.services} onChange={e => setData({...data, services: e.target.value})}/>)
                 }  
             </Text>
             <Title>Internal Correspondants</Title>
@@ -106,26 +137,24 @@ export const JobInfo: FC<IJobInfo> = (props) =>{
                 !props?.isEditable ? (<Correspondant userId={data?.userOneID}/>) 
                 :(
                     <>
-                        <select onChange={e => setData({...data, userOneID: e.target.value})}>
-                            <option>Select</option>
-                            {props?.users.map((el,index) => 
+                        <CustomSelect value={data?.userOneID} onChange={e => setData({...data, userOneID: e.target.value})}>
+                            {usersList?.map((el,index) => 
                                 (<option key={index} value={el.id}>{el.name}</option>)
                             )}
-                        </select>
+                        </CustomSelect>
                     </>
                 )
             }
             {
                 !props?.isEditable ? (<Correspondant userId={data?.userTwoID}/>) 
                 :(
-                    <>
-                        <select onChange={e => setData({...data, userTwoID: e.target.value})}>
-                            <option>Select</option>
-                            {props?.users.map((el,index) => 
+                    <ColumnInputs>
+                        <CustomSelectUsers value={data?.userTwoID} onChange={e => setData({...data, userTwoID: e.target.value})}>
+                            {usersList?.map((el,index) => 
                                 (<option key={index} value={el.id}>{el.name}</option>)
                             )}
-                        </select>
-                    </>
+                        </CustomSelectUsers>
+                    </ColumnInputs>
                 )
             }
         </Wrapper>

@@ -1,10 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { UserFunction } from './UserFunctions';
 
 import plus from '../../../icons/plus.svg';
 import pen from '../../../icons/pen.svg';
 import { Colors } from '../../../styledHelpers/Colors';
+import { useSelector } from 'react-redux';
+import { IState } from '../../../reducers';
+import { IPhotosReducer } from '../../../reducers/photoReducers';
+import { IUsersReducer } from '../../../reducers/userReducers';
+import { CustomInput } from '../../../styledHelpers/Components';
 
 const Wrapper = styled.div`
     width:100%;
@@ -84,8 +89,8 @@ const ButtonImg = styled.img`
     height:20px;
 `;
 
-const CustomInputText = styled.input`
-    
+const CustomInputUser = styled(CustomInput)`
+    width:200px;
 `;
 
 interface IAboutUser{
@@ -98,17 +103,37 @@ interface IAboutUser{
     avatar:string;
 }
 
-export const AboutUser: FC<IAboutUser> = (props) =>{
+export const AboutUser: FC = () =>{
+
+    const { currentUser, photoList } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState =>({
+        ...globalState.users,
+        ...globalState.photos
+    }));
+
     const [isEdit, isEditHandler] = useState(false);
-    const handleSubmit = () => {isEditHandler(!isEdit)}   
+
+    const handleSubmit = () => {isEditHandler(!isEdit)}
+
     const [data, setData] = useState({
-        phone: props?.phone,
-        city: props?.city,
-        name: props?.name,
-        companyName: props?.companyName,
-        email: props?.email,
-        text: 'Parnter',
+        phone: '',
+        city: '',
+        name: '',
+        companyName: '',
+        email: '',
+        text: '',
     });
+    
+    useEffect(() => {
+        const newData = {
+            phone: currentUser?.phone,
+            city: currentUser?.address.city,
+            name: currentUser?.name,
+            companyName: currentUser?.company.name,
+            email: currentUser?.email,
+            text: 'Parnter'
+        }
+        setData(newData);
+      },[currentUser]);
 
     return(
         <Wrapper>
@@ -120,32 +145,32 @@ export const AboutUser: FC<IAboutUser> = (props) =>{
             </FunctionSection>
             <UserSection>
                 <AvatarSection>
-                    <UserAvatar src={props?.avatar}/>
+                    <UserAvatar src={photoList?.filter(el => el?.id === currentUser?.id)[0]?.url}/>
                     <UserAvatarText>See profile</UserAvatarText>
                 </AvatarSection>
                 <UserData>
                     <UserDataTextBold>
                     {
                     !isEdit ? data?.name
-                            :(<input type='text' value={data?.name} onChange={e => setData({...data, name: e.target.value})}/>)
+                            :(<CustomInputUser type='text' value={data?.name} onChange={e => setData({...data, name: e.target.value})}/>)
                     }  
                     </UserDataTextBold>
                     <UserDataTextBold>
                     {
                     !isEdit ? data?.companyName
-                            :(<input type='text' value={data?.companyName} onChange={e => setData({...data, companyName: e.target.value})}/>)
+                            :(<CustomInputUser type='text' value={data?.companyName} onChange={e => setData({...data, companyName: e.target.value})}/>)
                     }  
                     </UserDataTextBold>
                     <UserText>
                     {
                     !isEdit ? data?.city
-                            :(<input type='text' value={data?.city} onChange={e => setData({...data, city: e.target.value})}/>)
+                            :(<CustomInputUser type='text' value={data?.city} onChange={e => setData({...data, city: e.target.value})}/>)
                     }    
                     </UserText>
                     <UserText>
                     {
                     !isEdit ? data?.text
-                            :(<input type='text' value={data?.text} onChange={e => setData({...data, text: e.target.value})}/>)
+                            :(<CustomInputUser type='text' value={data?.text} onChange={e => setData({...data, text: e.target.value})}/>)
                     }  
                     </UserText>
                 </UserData>
@@ -153,13 +178,13 @@ export const AboutUser: FC<IAboutUser> = (props) =>{
                     <UserText>
                     {
                     !isEdit ? data?.email
-                            :(<input type='text' value={data?.email} onChange={e => setData({...data, email: e.target.value})}/>)
+                            :(<CustomInputUser type='text' value={data?.email} onChange={e => setData({...data, email: e.target.value})}/>)
                     }  
                     </UserText>
                     <UserText>
                     {
                     !isEdit ? data?.phone
-                            :(<input type='text' value={data?.phone} onChange={e => setData({...data, phone: e.target.value})}/>)
+                            :(<CustomInputUser type='text' value={data?.phone} onChange={e => setData({...data, phone: e.target.value})}/>)
                     }
                     </UserText>
                 </UserContact>

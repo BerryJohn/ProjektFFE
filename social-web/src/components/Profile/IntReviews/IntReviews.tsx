@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
+import { fontSize } from '../../../styledHelpers/FontSizes';
 import Table from './Table';
 
 
@@ -12,8 +13,17 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-    color:${Colors.darkBlue};
+    color:${Colors.blue};
+    font-size:${fontSize[18]};
     margin-top:5px;
+    margin-left:5px;
+`;
+
+const SubText = styled.span`
+    color:${Colors.blue};
+    font-size:${fontSize[18]};
+    margin-top:0px;
+    cursor: pointer;
 `;
 
 interface IIntReviews{
@@ -25,6 +35,7 @@ export const IntReviews: FC<IIntReviews> = (props) =>{
         <Wrapper>
             <Title>Internal reviews</Title>
             <Table isEditable={props?.isEditable}/>
+            <SubText>See more reviews</SubText>
         </Wrapper>
     );
 };

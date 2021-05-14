@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import { Colors } from '../../../styledHelpers/Colors';
+import { fontSize } from '../../../styledHelpers/FontSizes';
 import countries from '../../../tools/countries';
 import Category from './Category';
 
@@ -23,6 +24,21 @@ const Title = styled.div`
 const CatContainter = styled.div`
     display:flex;
     flex-wrap:wrap;
+`;
+
+const CustomSelect = styled.select`
+    outline:none;
+    border:none;
+    background-color: #e6f0f3;
+    color:#71abbb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:2px 10px;
+    border-radius:2px;
+    margin-right:8px;
+    margin-top:2px;
+    font-size:${fontSize[16]};
 `;
 
 interface ICategories{
@@ -53,11 +69,10 @@ export const Categories: FC<ICategories> = (props) =>{
                 {!props.isEditable 
                     ? <Category text={data?.practiseLaw}/>
                     :
-                    <select onChange={e => setData({...data, practiseLaw: e.target.value})}>
-                        <option>Select</option>
+                    <CustomSelect value={data?.practiseLaw} onChange={e => setData({...data, practiseLaw: e.target.value})}>
                         <option>Yes</option>
                         <option>No</option>
-                    </select>
+                    </CustomSelect>
                 }
             </CatContainter>
             <Title>Countries</Title>
@@ -65,10 +80,9 @@ export const Categories: FC<ICategories> = (props) =>{
                 {!props.isEditable 
                     ? <Category text={data?.country}/>
                     :
-                    <select onChange={e => setData({...data, country: e.target.value})}>
-                        <option>Select</option>
-                        {countries.map(el => (<option>{el}</option>))}
-                    </select>
+                    <CustomSelect value={data?.country} onChange={e => setData({...data, country: e.target.value})}>
+                        {countries.map((el,index) => (<option key={index}>{el}</option>))}
+                    </CustomSelect>
                 }
             </CatContainter>
         </Wrapper>

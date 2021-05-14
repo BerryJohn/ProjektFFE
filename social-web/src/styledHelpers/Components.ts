@@ -59,3 +59,13 @@ export const SubMenuTitle = styled.span`
     margin: 3px 6px;
     display:block;
 `;
+
+export const CustomInput = styled.input`
+    height:25px;
+    width:100px;
+    outline:none;
+    box-sizing:border-box;
+    padding:3px;
+    border:1px solid ${Colors.lightGray};
+    border-radius:2px;
+`;
