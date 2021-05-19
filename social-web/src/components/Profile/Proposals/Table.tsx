@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
 import { CustomInput } from '../../../styledHelpers/Components';
+import DatePicker from 'react-datepicker';
 
+import "react-datepicker/dist/react-datepicker.css";
+import {formatDate} from '../../../tools/dateFormat';
 
 const Wrapper = styled.div`
     width:100%;
@@ -36,12 +39,22 @@ const Row = styled.div`
     padding:2px 4px;
     font-size: ${fontSize[14]};
     width:100px;
-    height:15px;
+    height:20px;
     padding:5px 10px;
     text-overflow:ellipsis;
     overflow: hidden;
     white-space: nowrap;
 `;
+
+const CustomDatePicker = styled(DatePicker)`
+    height:25px;
+    width:100px;
+    box-sizing:border-box;
+    padding:3px;
+    border:1px solid ${Colors.lightGray};
+    border-radius:2px;
+`;
+
 interface ITable{
     isEditable: boolean;
 }
@@ -67,9 +80,9 @@ export const Table: FC<ITable> = (props) =>{
             {id:1,value:'#MDM&A'},
             {id:2,value:'#Social'}],
         date:[
-            {id:0,value:'20.01.2021'},
-            {id:1,value:'21.05.2021'},
-            {id:2,value:'11.03.2021'}],
+            {id:0,value:'Mon May 17 2021 00:00:00 GMT+0200 (czas środkowoeuropejski letni)'},
+            {id:1,value:'Mon May 29 2001 00:00:00 GMT+0200 (czas środkowoeuropejski letni)'},
+            {id:2,value:'Mon May 12 2009 00:00:00 GMT+0200 (czas środkowoeuropejski letni)'}],
         firm:[
             {id:0,value:'Racinne'},
             {id:1,value:'Scafford'},
@@ -135,14 +148,18 @@ export const Table: FC<ITable> = (props) =>{
                 </Column>
                 <Column>
                 {!props.isEditable ?
-                        data.date.map(el => (<Row>{el.value}</Row>)) :
-                        data.date.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{
-                            let newData = data.date.map(el => {
+                        data.date.map(el => (<Row>{formatDate(new Date(el.value))}</Row>)) 
+                        :
+                        data.date.map((el,index) => (<CustomDatePicker 
+                        selected={Date.parse(data?.date[index].value)} 
+                        dateFormat="dd/MM/yyyy"
+                        onChange={e => {
+                            let newData = data?.date.map(el => {
                                 if(el.id == index)
-                                    {el.value = e.target.value;return el;}
+                                    {el.value = `${e}`;return el;}
                                 else return el;
                             }); setData({...data,date: newData});
-                        }}></CustomInput>))}
+                        }}/>))}
                 </Column>
                 <Column>
                 {!props.isEditable ?

@@ -68,4 +68,8 @@ export const CustomInput = styled.input`
     padding:3px;
     border:1px solid ${Colors.lightGray};
     border-radius:2px;
+    transition: .2s;
+    &:focus{
+        border:1px solid #2684ff;
+    }
 `;

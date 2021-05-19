@@ -2,8 +2,11 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
-import DatePicker from 'react-date-picker';
 import { CustomInput } from '../../../styledHelpers/Components';
+import DatePicker from 'react-datepicker';
+
+import "react-datepicker/dist/react-datepicker.css";
+import {formatDate} from '../../../tools/dateFormat';
 
 const Wrapper = styled.div`
     width:100%;
@@ -43,6 +46,15 @@ const Row = styled.div`
     white-space: nowrap;
 `;
 
+const CustomDatePicker = styled(DatePicker)`
+    height:25px;
+    width:100px;
+    box-sizing:border-box;
+    padding:3px;
+    border:1px solid ${Colors.lightGray};
+    border-radius:2px;
+`;
+
 interface ITable{
     isEditable: boolean;
 }
@@ -52,9 +64,9 @@ export const Table: FC<ITable> = (props) =>{
     const [data, setData] = useState(
         {
         years:[
-            {id:0,value:'2019'},
-            {id:1,value:'2018'},
-            {id:2,value:'2017'}],
+            {id:0,value:'Mon May 17 2021 00:00:00 GMT+0200 (czas środkowoeuropejski letni)'},
+            {id:1,value:'Mon May 17 2020 00:00:00 GMT+0200 (czas środkowoeuropejski letni)'},
+            {id:2,value:'Mon May 17 2019 00:00:00 GMT+0200 (czas środkowoeuropejski letni)'}],
         costcenter:[
             {id:0,value:'CS 153'},
             {id:1,value:'CS 153'},
@@ -86,18 +98,24 @@ export const Table: FC<ITable> = (props) =>{
             <Data>
                 <Column>
                     {!props.isEditable ?
-                        data.years.map(el => (<Row>{el.value}</Row>)) :
-                        data.years.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{
-                            let newData = data.years.map(el => {
-                                if(el.id == index)
-                                    {el.value = e.target.value;return el;}
-                                else return el;
-                            }); setData({...data,years: newData});
-                        }}></CustomInput>))}
+                        data.years.map(el => (<Row>{new Date(el.value).getFullYear()}</Row>)) 
+                        :
+                        data.years.map((el,index) => (<CustomDatePicker 
+                            selected={Date.parse(data?.years[index].value)} 
+                            showYearPicker
+                            dateFormat="yyyy"
+                            onChange={e => {
+                                let newData = data?.years.map(el => {
+                                    if(el.id == index)
+                                        {el.value = `${e}`;return el;}
+                                    else return el;
+                                }); setData({...data,years: newData});
+                            }}/>))}
                 </Column>
                 <Column>
                     {!props.isEditable ?
-                        data.costcenter.map(el => (<Row>{el.value}</Row>)) :
+                        data.costcenter.map(el => (<Row>{el.value}</Row>)) 
+                        :
                         data.costcenter.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{
                             let newData = data.costcenter.map(el => {
                                 if(el.id == index)
@@ -108,7 +126,8 @@ export const Table: FC<ITable> = (props) =>{
                 </Column>
                 <Column>
                     {!props.isEditable ?
-                        data.totalamount.map(el => (<Row>{el.value}</Row>)) :
+                        data.totalamount.map(el => (<Row>{el.value}</Row>)) 
+                        :
                         data.totalamount.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{
                             let newData = data.totalamount.map(el => {
                                 if(el.id == index)
@@ -119,7 +138,8 @@ export const Table: FC<ITable> = (props) =>{
                 </Column>
                 <Column>
                     {!props.isEditable ?
-                        data.lawfirm.map(el => (<Row>{el.value}</Row>)) :
+                        data.lawfirm.map(el => (<Row>{el.value}</Row>)) 
+                        :
                         data.lawfirm.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{
                             let newData = data.lawfirm.map(el => {
                                 if(el.id == index)

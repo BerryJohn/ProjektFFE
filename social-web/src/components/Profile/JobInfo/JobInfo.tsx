@@ -8,6 +8,7 @@ import { IUsersReducer } from '../../../reducers/userReducers';
 import { ISingleUser } from '../../../entities/users';
 import { IState } from '../../../reducers';
 import { useSelector } from 'react-redux';
+import Select from 'react-select';
 
 const Wrapper = styled.div`
     width:1000px;
@@ -45,36 +46,49 @@ const AttachImg = styled.img`
     margin:0px 10px;
 `;
 
-const CustomSelect = styled.select`
-    height:25px;
-    max-width:170px;
-    outline:none;
-    box-sizing:border-box;
-    padding:3px;
-    border:1px solid ${Colors.lightGray};
-    border-radius:2px;
-`;
 const CustomInput = styled.input`
-    height:25px;
+    height:38px;
     outline:none;
     box-sizing:border-box;
     padding:3px;
     border:1px solid ${Colors.lightGray};
-    border-radius:2px;
+    border-radius:4px;
+    font-size:${fontSize[16]};
+    transition: .09s;
+    &:focus{
+        border:2px solid #2684ff;
+    }
 `;
 
-const CustomSelectUsers = styled(CustomSelect)`
-    margin-top:5px;
-`;
-
-const ColumnInputs = styled.div`
+const CustomSelectCurrency = styled(Select)`
+    width:80px;
+`
+const CustomSelectUser = styled(Select)`
+    min-width:180px;
+    max-width:300px;
+`
+const RowSelects = styled.div`
     display:flex;
-    flex-direction:column;
+    align-items:center;
 `;
+
 
 interface IJobInfo{
     isEditable: boolean;
 }
+
+interface ISelect{
+    value:string;
+    label:string;
+}
+
+const currencies: ISelect[] = [
+    {value:'$', label:'$'},
+    {value:'PLN', label:'PLN'},
+    {value:'€', label:'€'},
+    {value:'£', label:'£'},
+];
+// const usersObj = usersList?.map(el => ({value:`${el}`, label: `${el}`}));
 
 export const JobInfo: FC<IJobInfo> = (props) =>{
 
@@ -84,14 +98,18 @@ export const JobInfo: FC<IJobInfo> = (props) =>{
 
     const [data, setData] = useState({
         salary: '640',
-        currency: '$',
+        currency: {value: '$', label: '$'},
         negociated: true,
         terms: 'Montly 10kPLN retainer - see with Polek',
         file: 'xD.png',
         services: 'Corparate with Harnaś and internal tatras',
-        userOneID: '2',
-        userTwoID: '3',
+        userOneID: {value: 2, label: 'Ervin Howell'},
+        userTwoID: {value: 3, label: 'Clementine Bauch'},
     });
+
+    const currencyChange = (val) => setData({...data,currency: val});
+    const userOneChange = (val) => setData({...data,userOneID: val});
+    const userTwoChange = (val) => setData({...data,userTwoID: val});
 
     return(
         <Wrapper> 
@@ -99,17 +117,16 @@ export const JobInfo: FC<IJobInfo> = (props) =>{
             <SmallTitle>Hourly fee</SmallTitle>
             <Text>
                 {
-                !props?.isEditable ? (`${data?.salary}${data?.currency}/day ${data?.negociated ? '(Negociated)' : '(Non-negotiable)'}`)
-                            :(<>
+                !props?.isEditable ? (`${data?.salary}${data?.currency.value}/day ${data?.negociated ? '(Negociated)' : '(Non-negotiable)'}`)
+                            :(<RowSelects>
                                 <CustomInput type='text' value={data?.salary} onChange={e => setData({...data, salary: e.target.value})}/>
-                                <CustomSelect value={data?.currency} onChange={e => setData({...data, currency: e.target.value})}>
-                                    <option>PLN</option>
-                                    <option>$</option>
-                                    <option>€</option>
-                                    <option>£</option>
-                                </CustomSelect>
+                                <CustomSelectCurrency
+                                onChange={currencyChange}
+                                options={currencies}
+                                value={data?.currency}
+                                /> 
                                 <CustomInput type='checkbox' checked={data?.negociated} onChange={e => setData({...data, negociated: e.target.checked})}/>(Negociated)
-                            </>)
+                            </RowSelects>)
                 }  
             </Text>
             <SmallTitle>Terms & conditions</SmallTitle>
@@ -122,7 +139,7 @@ export const JobInfo: FC<IJobInfo> = (props) =>{
             <AttachCV><AttachImg src={file}/>
                 {
                 !props?.isEditable ? data?.file
-                            :(<input type='file' onChange={e => setData({...data, file:  e.target.files[0].name as string})}/>)
+                            :(<input type='file' onChange={e => setData({...data, file:  e?.target?.files[0]?.name as string})}/>)
                 }  
             </AttachCV>
             <Title>Services and Projects</Title>
@@ -134,27 +151,25 @@ export const JobInfo: FC<IJobInfo> = (props) =>{
             </Text>
             <Title>Internal Correspondants</Title>
             {
-                !props?.isEditable ? (<Correspondant userId={data?.userOneID}/>) 
+                !props?.isEditable ? (<Correspondant userId={`${data?.userOneID.value}`}/>) 
                 :(
                     <>
-                        <CustomSelect value={data?.userOneID} onChange={e => setData({...data, userOneID: e.target.value})}>
-                            {usersList?.map((el,index) => 
-                                (<option key={index} value={el.id}>{el.name}</option>)
-                            )}
-                        </CustomSelect>
+                        <CustomSelectUser
+                                onChange={userOneChange}
+                                options={usersList?.map(el => ({value:`${el.id}`, label: `${el.name}`}))}
+                                value={data?.userOneID}
+                        /> 
                     </>
                 )
             }
             {
-                !props?.isEditable ? (<Correspondant userId={data?.userTwoID}/>) 
+                !props?.isEditable ? (<Correspondant userId={`${data?.userTwoID.value}`}/>) 
                 :(
-                    <ColumnInputs>
-                        <CustomSelectUsers value={data?.userTwoID} onChange={e => setData({...data, userTwoID: e.target.value})}>
-                            {usersList?.map((el,index) => 
-                                (<option key={index} value={el.id}>{el.name}</option>)
-                            )}
-                        </CustomSelectUsers>
-                    </ColumnInputs>
+                <CustomSelectUser
+                onChange={userTwoChange}
+                options={usersList?.map(el => ({value:`${el.id}`, label: `${el.name}`}))}
+                value={data?.userTwoID}
+                /> 
                 )
             }
         </Wrapper>

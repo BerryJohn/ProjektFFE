@@ -2,8 +2,13 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
-import DatePicker from 'react-date-picker';
 import { CustomInput } from '../../../styledHelpers/Components';
+import DatePicker from 'react-datepicker';
+import Select from 'react-select'
+
+import "react-datepicker/dist/react-datepicker.css";
+
+import { formatDate } from '../../../tools/dateFormat';
 
 const Wrapper = styled.div`
     width:100%;
@@ -36,11 +41,20 @@ const Row = styled.div`
     padding:2px 4px;
     font-size: ${fontSize[14]};
     width:100px;
-    height:15px;
+    height:20px;
     padding:5px 10px;
     text-overflow:ellipsis;
     overflow: hidden;
     white-space: nowrap;
+`;
+
+const CustomDatePicker = styled(DatePicker)`
+    height:25px;
+    width:100px;
+    box-sizing:border-box;
+    padding:3px;
+    border:1px solid ${Colors.lightGray};
+    border-radius:2px;
 `;
 
 interface ITable{
@@ -68,9 +82,9 @@ export const Table: FC<ITable> = (props) =>{
             {id:1,value:'#MDM&A'},
             {id:2,value:'#Social'}],
         date:[
-            {id:0,value:'20.01.2021'},
-            {id:1,value:'21.05.2021'},
-            {id:2,value:'11.03.2021'}],
+            {id:0,value:'Mon May 17 2020 00:00:00 GMT+0200 (czas środkowoeuropejski letni)'},
+            {id:1,value:'Mon May 13 2021 00:00:00 GMT+0200 (czas środkowoeuropejski letni)'},
+            {id:2,value:'Mon May 01 2004 00:00:00 GMT+0200 (czas środkowoeuropejski letni)'}],
         });
 
     return(
@@ -85,7 +99,8 @@ export const Table: FC<ITable> = (props) =>{
             <Data>
                 <Column>
                     {!props.isEditable ?
-                        data.names.map(el => (<Row>{el.value}</Row>)) :
+                        data.names.map(el => (<Row>{el.value}</Row>)) 
+                        :
                         data.names.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{
                             let newData = data.names.map(el => {
                                 if(el.id == index)
@@ -96,18 +111,21 @@ export const Table: FC<ITable> = (props) =>{
                 </Column>
                 <Column>
                 {!props.isEditable ?
-                        data.entity.map(el => (<Row>{el.value}</Row>)) :
+                        data.entity.map(el => (<Row>{el.value}</Row>)) 
+                        :
                         data.entity.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{
                             let newData = data.entity.map(el => {
                                 if(el.id == index)
                                     {el.value = e.target.value;return el;}
                                 else return el;
                             }); setData({...data,entity: newData});
-                        }}></CustomInput>))}
+                        }}></CustomInput>))
+                }
                 </Column>
                 <Column>
                 {!props.isEditable ?
-                        data.location.map(el => (<Row>{el.value}</Row>)) :
+                        data.location.map(el => (<Row>{el.value}</Row>)) 
+                        :
                         data.location.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{
                             let newData = data.location.map(el => {
                                 if(el.id == index)
@@ -118,7 +136,8 @@ export const Table: FC<ITable> = (props) =>{
                 </Column>
                 <Column>
                 {!props.isEditable ?
-                        data.expertise.map(el => (<Row>{el.value}</Row>)) :
+                        data.expertise.map(el => (<Row>{el.value}</Row>)) 
+                        :
                         data.expertise.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{
                             let newData = data.expertise.map(el => {
                                 if(el.id == index)
@@ -129,14 +148,18 @@ export const Table: FC<ITable> = (props) =>{
                 </Column>
                 <Column>
                 {!props.isEditable ?
-                        data.date.map(el => (<Row>{el.value}</Row>)) :
-                        data.date.map((el,index) => (<CustomInput value={el.value} type='text' onChange={(e) =>{
-                            let newData = data.date.map(el => {
+                        data.date.map(el => (<Row>{formatDate(new Date(el.value))}</Row>)) 
+                        :
+                        data.date.map((el,index) => (<CustomDatePicker 
+                        selected={Date.parse(data?.date[index].value)} 
+                        dateFormat="dd/MM/yyyy"
+                        onChange={e => {
+                            let newData = data?.date.map(el => {
                                 if(el.id == index)
-                                    {el.value = e.target.value;return el;}
+                                    {el.value = `${e}`;return el;}
                                 else return el;
                             }); setData({...data,date: newData});
-                        }}></CustomInput>))}
+                        }}/>))}
                 </Column>
             </Data>
         </Wrapper>

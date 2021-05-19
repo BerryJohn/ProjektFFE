@@ -12,7 +12,6 @@ import pen from '../../icons/pen.svg';
 
 const Wrapper = styled.div`
     width:1000px;
-    min-height:200px;
     background-color:${Colors.white};
     position:relative;
 `;
@@ -31,11 +30,11 @@ const EditButton = styled.button`
     right:15px;
     top:140px;
 `;
+
 const ButtonImg = styled.img`
     width:20px;
     height:20px;
 `;
-
 
 export const Profile: FC = () =>{
 

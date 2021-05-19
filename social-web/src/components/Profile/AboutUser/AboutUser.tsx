@@ -91,6 +91,9 @@ const ButtonImg = styled.img`
 
 const CustomInputUser = styled(CustomInput)`
     width:200px;
+    &:focus{
+        border:1px solid #2684ff;
+    }
 `;
 
 interface IAboutUser{

@@ -69,6 +69,11 @@ const Menu = styled.div`
     position:relative;
 `;
 
+const SearchWrapper = styled.div`
+    width:500px;
+    height: 30px;
+`;
+
 export const TopBar: FC = props => {
 
     const { usersList, photoList, currentUser } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState => ({
@@ -100,7 +105,10 @@ export const TopBar: FC = props => {
                     {dropdownOpen && <ExpandedMenu closeMenu={closeDropMenu} userPhoto={photoList?.filter(el => el?.id === currentUser?.id)[0]?.url} currentUser={currentUser}/>}
                 </Menu>
             </LeftButtonSet>
-            <SearchBar />
+            <SearchWrapper>
+                <SearchBar />
+            </SearchWrapper>
+            
             <RightButtonSet>
                 <HouseButton />
                 <RoundButton image={commentsImg} altText="Check your comments!" notifyCount="41"/>

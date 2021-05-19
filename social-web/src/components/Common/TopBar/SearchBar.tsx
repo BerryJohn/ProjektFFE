@@ -5,8 +5,8 @@ import searchIcon from '../../../icons/search.svg';
 import { Colors } from '../../../styledHelpers/Colors';
 
 const Search = styled.div`
-    width:500px;
-    height: 30px;
+    width:100%;
+    height: 100%;
     border: 1px solid ${Colors.lightGray};
     color:${Colors.lightGray};
     display:flex;
@@ -15,6 +15,7 @@ const Search = styled.div`
     position:relative;
     border-radius:2px;
     box-shadow: 0px 0px 4px ${Colors.lightGray};
+    overflow:hidden;
 `;
 
 const Loupe = styled.img`
@@ -26,8 +27,8 @@ const Loupe = styled.img`
 `;
 
 const SearchInput = styled.input`
-    width:475px;
-    height:25px;
+    width:100%;
+    height: 100%;
     border:none;
     text-align:center;
     margin-right:25px;
