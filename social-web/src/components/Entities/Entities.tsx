@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../styledHelpers/Colors';
 import { fontSize } from '../../styledHelpers/FontSizes';
@@ -9,9 +9,6 @@ import filter from '../../icons/filter.svg';
 import resize from '../../icons/resize.svg';
 import share from '../../icons/share.svg';
 import SearchBar from '../Common/TopBar/SearchBar';
-
-
-
 
 const Containter = styled.div`
     width:1000px;
@@ -80,6 +77,13 @@ const SearchWrapper = styled.div`
 `;
 
 export const Entities: FC = () =>{
+
+    const [inputText, setInputText] = useState<string>('');
+
+    const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputText((e.target.value as string).trim().toLocaleLowerCase());
+    }
+
     return(
         <Containter>
             <Menu>
@@ -108,12 +112,12 @@ export const Entities: FC = () =>{
                     </ButtonPanel>
 
                     <SearchWrapper>
-                        <SearchBar/>  
+                        <input type='text' onChange={inputChangeHandler}/>
                     </SearchWrapper>
                    
                 </DownMenu>
             </Menu>
-            <EntitiesContainer />
+            <EntitiesContainer filter={inputText}/>
         </Containter>
     );
 };

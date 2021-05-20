@@ -12,10 +12,9 @@ import { EcoSystem } from './LinksShortcut/Ecosystem';
 import { Entities } from './LinksShortcut/Entities';
 import { QuickUserInfo } from './QuickUserInfo';
 
-
-
 const Bar = styled.div`
-    width:300px;
+    min-width:300px;
+    max-width:300px;
     height:500px;
     display:flex;
     flex-direction: column;
@@ -31,7 +30,7 @@ const Links = styled.div`
 
 export const LeftBar: FC = () => {
 
-    const { usersList, photoList, currentUser } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState => ({
+    const { photoList, currentUser } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState => ({
         ...globalState.users,
         ...globalState.photos,
     }));

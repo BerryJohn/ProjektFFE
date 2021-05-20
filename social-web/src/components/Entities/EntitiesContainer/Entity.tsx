@@ -56,19 +56,24 @@ const SubText = styled.span`
     line-height: 18px;
 `;
 
-export const EntitiesContainer: FC = () => {
+interface IEntity{
+    photo:string;
+    title:string;
+    subtext:string;
+}
 
+export const Entity: FC<IEntity> = (props) => {
     return(
         <Wrapper>
             <ImageCont>
-                <Image src='https://i.imgur.com/EYmeblE.jpg'></Image>
+                <Image src={props?.photo}></Image>
             </ImageCont>
             <Data>
-                <Title>JEc</Title>
-                <SubText>Xdgfdgfkldddd</SubText>
+                <Title>{props?.title}</Title>
+                <SubText>{props?.subtext}</SubText>
             </Data>
         </Wrapper>
     );
 }
 
-export default EntitiesContainer;
+export default Entity;

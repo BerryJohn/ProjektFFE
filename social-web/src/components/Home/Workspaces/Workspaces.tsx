@@ -10,6 +10,8 @@ const Title = styled.h1`
     font-size: ${fontSize[20]};
     color: ${Colors.darkBlue};
     margin:15px 10px;
+    justify-self:flex-start;
+    width:1000px;
 `;
 
 export const Workspaces: FC = () =>{

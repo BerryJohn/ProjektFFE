@@ -8,7 +8,6 @@ import { ICommentReducer } from '../../../reducers/commentReducer';
 import { IPhotosReducer } from '../../../reducers/photoReducers';
 import { IUsersReducer } from '../../../reducers/userReducers';
 
-
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
 import SingleComment from './SingleComment';
@@ -17,6 +16,7 @@ const Title = styled.h1`
     font-size: ${fontSize[20]};
     color: ${Colors.darkBlue};
     margin:15px 10px;
+    width:1000px;
 `;
 
 const PageSelector = styled.div`

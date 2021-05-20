@@ -24,10 +24,11 @@ import { getComments } from '../../actions/commentActions';
 import { Profile } from '../Profile/Profile';
 const Content = styled.div`
     display:flex;
+    width:100vw;
     justify-content:center;
-    /* flex-direction:column; */
     background-color: ${Colors.lightBackground};
     min-height:calc(100vh - 50px); //50px - topbar
+    margin-right:auto;
 `;
 
 const Main = styled.div`
@@ -37,8 +38,12 @@ const Main = styled.div`
 `;
 
 const PageContent = styled.div`
-    width:100%;
     padding:15px;
+    flex-grow:1;
+    margin-right:300px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 `;
 
 type GetUsers = ReturnType<typeof getUsers>;
