@@ -10,6 +10,7 @@ import DisplayMenu from './DisplayMenu';
 
 const Containter = styled.div`
     width:1000px;
+    /* width:calc(100vw - 50px); */
     background-color:${Colors.white};
     padding:10px 10px;
 `;
@@ -73,12 +74,13 @@ export const Entities: FC = () =>{
 
     const [inputText, setInputText] = useState<string>('');
     const [displayStyle, setDisplayStyle] = useState<boolean>(true);
+    const [sortAlphabetic, setSortAlphabetic] = useState<boolean>(true);
 
     const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setInputText((e.target.value as string).trim().toLocaleLowerCase());
     };
     const displayStyleHanlder = () => setDisplayStyle(!displayStyle);
-    
+    const sortHanlder = () => setSortAlphabetic(!sortAlphabetic);
 
     return(
         <Containter>
@@ -91,7 +93,7 @@ export const Entities: FC = () =>{
                     <DisplayMenu onClicked={displayStyleHanlder} mosaic={displayStyle} />
                 </UpMenu>
                 <DownMenu>
-                    <ButtonPanel />
+                    <ButtonPanel onClickSort={sortHanlder}/>
                     <RightPanel>
                         <SearchWrapper>
                             <SearchBar searchHandler={inputChangeHandler}/>
@@ -101,7 +103,7 @@ export const Entities: FC = () =>{
                     </RightPanel>
                 </DownMenu>
             </Menu>
-            <EntitiesContainer isMosaic={displayStyle} filter={inputText}/>
+            <EntitiesContainer sortAlphabetically={sortAlphabetic} isMosaic={displayStyle} filter={inputText}/>
         </Containter>
     );
 };

@@ -16,12 +16,13 @@ interface IEntity {
     photo:string;
     title:string;
     subtext:string;
-}
+};
 
 interface IEntitiesContainter{
     filter: string;
     isMosaic:boolean;
-}
+    sortAlphabetically:boolean;
+};
 
 export const EntitiesContainer: FC<IEntitiesContainter> = (props) => {
 
@@ -31,17 +32,17 @@ export const EntitiesContainer: FC<IEntitiesContainter> = (props) => {
 
     const entitiesArr:IEntity[] =  [];
 
-    for(let i = 0; i < 30; i++)
-    {
-        entitiesArr.push({photo: `${photoList[i]?.url}`, title: `Comapny #${i}`, subtext: `W goroncej wodzie Comapny #${i}`});
+    for(let i = 0; i < 30; i++){
+        entitiesArr.push({photo: `${photoList[i]?.url}`, title: `Company #${i}`, subtext: `W goroncej wodzie Company #${i}`});
     }
-
+    
     return(
         <Wrapper>
             {entitiesArr.filter(el => el.title
                                       .toLocaleLowerCase()
                                       .trim()
                                       .includes(props.filter))
+                                      .sort((a,b) => props.sortAlphabetically ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title))
                                       .map((el,index) => 
                                       (<Entity key={index} title={el.title} photo={el.photo} subtext={el.subtext} isMosaic={props.isMosaic}/>))}
         </Wrapper>

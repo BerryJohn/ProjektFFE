@@ -17,7 +17,7 @@ const Wrapper = styled.div<IEntityDisplay>`
     display:flex;
     ${props => (
         props.isMosaic ? `width:240px;` : `width:100%;`
-    )}
+    )};
 `;
 
 const ImageCont = styled.div`
@@ -39,7 +39,6 @@ const Data = styled.div`
     display:flex;
     flex-direction:column;
     height:80px;
-    /* width:150px; */
 `;
 
 const Title = styled.span`

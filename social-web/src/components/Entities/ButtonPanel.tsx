@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useRef} from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../styledHelpers/Colors';
 import { fontSize } from '../../styledHelpers/FontSizes';
@@ -27,13 +27,17 @@ const Options = styled.div`
     height:25px;
 `;
 
-const Option = styled.div`
+const Option = styled.button`
+    background-color: transparent;
+    outline:none;
+    border:none;
     color:${Colors.gray};
     margin-left:10px;
     padding:2px 2px;
     border-left:1px solid ${Colors.lightGray};
     display:flex;
     align-items:center;
+    cursor:pointer;
 `;
 
 const ImgIcon = styled.img`
@@ -54,22 +58,29 @@ const Text = styled.span`
     margin-left:5px;
 `;
 
-export const ButtonPanel: FC = (props) => {
+interface IButtonPanel {
+    onClickSort():void;
+}
+
+export const ButtonPanel: FC<IButtonPanel> = (props) => {
+
     return(
         <Wrapper>
             <CustomSelect></CustomSelect>
             <More src={more}/>
             <Options>
-                <Option>
+                <Option onClick={() => props.onClickSort()}>
                     <ImgIcon src={sort}/>
                     <Text>Sort</Text>
+                </Option>
+                <Option>
                     <ImgIcon src={filter}/>
                     <Text>Filters</Text>
                 </Option>
                 <Option>
                     <ImgIcon src={resize}/>
                     </Option>
-                <Option>
+                <Option onClick={() =>  navigator.clipboard.writeText(window.location.href)}>
                     <ImgIcon src={share}/>
                     <Text>Share</Text>
                 </Option>

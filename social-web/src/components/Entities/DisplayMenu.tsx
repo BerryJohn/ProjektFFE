@@ -59,7 +59,7 @@ export const DisplayMenu: FC<IDisplayMenu> = (props) => {
             </Container>
             <Container active={!props.mosaic}>
                 <DisplayImg src={line}/>
-                {!props.mosaic && (<Text>Lines</Text>)}
+                {!props.mosaic && (<Text>Line</Text>)}
             </Container>
         </Wrapper>
     );
