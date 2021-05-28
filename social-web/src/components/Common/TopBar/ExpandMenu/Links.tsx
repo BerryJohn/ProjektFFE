@@ -14,6 +14,7 @@ import corporateImg from '../../../../icons/entities2.svg';
 import administrationImg from '../../../../icons/administration.svg';
 
 import { SubMenuTitle } from '../../../../styledHelpers/Components';
+import workspaceData from '../../../../tools/workspacesData';
 
 const LinksBody = styled.div`
     max-height:300px;
@@ -50,15 +51,17 @@ export const Links: FC<ILinks> = (props) => {
                 {props.filterValue.length == 0 &&
                 <SubMenuTitle> Workspaces</SubMenuTitle>}
                 {'client contract'.includes(props.filterValue) &&
-                <ExpandMenuLink onClick={closeDropMenu}  title={"Client contract"} imgSrc={houseImg} linkTo="/clientContract"/>}
+                <ExpandMenuLink 
+                    onClick={closeDropMenu}  title={"Client contract"} 
+                    imgName={workspaceData.filter(el => el.id == `clientContract`)[0].icon} linkTo="/workspaces/clientContract"/>}
                 {'supplier contract'.includes(props.filterValue) &&
-                <ExpandMenuLink onClick={closeDropMenu}  title={"Supplier contract"} imgSrc={houseImg} linkTo="/supplierContract"/>}
+                <ExpandMenuLink onClick={closeDropMenu}  title={"Supplier contract"} imgSrc={houseImg} linkTo="/workspaces/supplierContract"/>}
                 {'corporate'.includes(props.filterValue) &&
-                <ExpandMenuLink onClick={closeDropMenu}  title={"Corporate"} imgSrc={corporateImg} linkTo="/corporate"/>}
+                <ExpandMenuLink onClick={closeDropMenu}  title={"Corporate"} imgSrc={corporateImg} linkTo="/workspaces/corporate"/>}
                 {'group norms'.includes(props.filterValue) &&
-                <ExpandMenuLink onClick={closeDropMenu}  title={"Group Norms"} imgSrc={houseImg} linkTo="/groupNorms"/>}
+                <ExpandMenuLink onClick={closeDropMenu}  title={"Group Norms"} imgSrc={houseImg} linkTo="/workspaces/groupNorms"/>}
                 {'real estate contracts'.includes(props.filterValue) &&
-                <ExpandMenuLink onClick={closeDropMenu}  title={"Real estate contracts"} imgSrc={houseImg} linkTo="realEstateContracts"/>}
+                <ExpandMenuLink onClick={closeDropMenu}  title={"Real estate contracts"} imgSrc={houseImg} linkTo="/workspaces/realEstateContracts"/>}
         </LinksBody>
     );
 };

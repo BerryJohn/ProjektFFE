@@ -20,6 +20,7 @@ interface IEntity {
 
 interface IEntitiesContainter{
     filter: string;
+    isMosaic:boolean;
 }
 
 export const EntitiesContainer: FC<IEntitiesContainter> = (props) => {
@@ -37,7 +38,12 @@ export const EntitiesContainer: FC<IEntitiesContainter> = (props) => {
 
     return(
         <Wrapper>
-            {entitiesArr.filter(el => el.title.toLocaleLowerCase().trim().includes(props.filter)).map((el,index) => (<Entity key={index} title={el.title} photo={el.photo} subtext={el.subtext}/>))}
+            {entitiesArr.filter(el => el.title
+                                      .toLocaleLowerCase()
+                                      .trim()
+                                      .includes(props.filter))
+                                      .map((el,index) => 
+                                      (<Entity key={index} title={el.title} photo={el.photo} subtext={el.subtext} isMosaic={props.isMosaic}/>))}
         </Wrapper>
     );
 }

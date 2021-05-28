@@ -6,6 +6,8 @@ import arrowDown from '../../../../icons/arrow-down.svg'
 
 import { Colors } from '../../../../styledHelpers/Colors';
 
+import workspaceImg from '../../../../icons/workspace.svg';
+
 const MenuButton = styled.button`
     background-color: transparent;
     border:none;
@@ -30,6 +32,10 @@ const PageName = styled.div`
     font-size:18px;
     text-align:left;
 `;
+
+interface ParamTypes {
+    workspace: string;
+}
 
 export const ExpandMenuButton: FC = () => {
     return(
@@ -56,8 +62,12 @@ export const ExpandMenuButton: FC = () => {
                         <ImageSelector src="./icons/settings.svg" alt="Current page image"/>               
                         <PageName>Profile</PageName>
                     </Route>
+                    <Route path='/workspaces/:workspace'>
+                        <ImageSelector src={workspaceImg} alt="Current page image"/>               
+                        <PageName>Workspace</PageName>
+                    </Route>
                     <Route path='/'>
-                        <ImageSelector src="./icons/house2.svg" alt="Current page image"/>               
+                        <ImageSelector src='./icons/house2.svg' alt="Current page image"/>               
                         <PageName>Home</PageName>
                     </Route>
                 </Switch>

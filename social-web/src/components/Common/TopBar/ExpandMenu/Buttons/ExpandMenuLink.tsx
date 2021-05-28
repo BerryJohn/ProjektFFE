@@ -36,7 +36,8 @@ const InvisibleButton = styled.button`
 
 interface ITitle{
     title: string;
-    imgSrc: string;
+    imgSrc?: string;
+    imgName?: string;
     linkTo: string;
     onClick(): void;
 }
@@ -46,7 +47,7 @@ export const ExpandMenuLink: FC<ITitle> = props =>{
     <InvisibleButton onClick={props.onClick}>        
         <CustomLink to={props.linkTo}>
             <LinkBody>
-                <LinkImg src={props.imgSrc} />
+                <LinkImg src={props.imgSrc ? props.imgSrc : `../../../../../icons/${props?.imgName}`} />
                 <LinkSpan>{props.title}</LinkSpan>
             </LinkBody>
         </CustomLink>

@@ -4,48 +4,38 @@ import { Colors } from '../../styledHelpers/Colors';
 import { fontSize } from '../../styledHelpers/FontSizes';
 import EntitiesContainer from './EntitiesContainer/EntitiesContainer';
 import gear from '../../icons/gear.svg';
-import sort from '../../icons/sort.svg';
-import filter from '../../icons/filter.svg';
-import resize from '../../icons/resize.svg';
-import share from '../../icons/share.svg';
 import SearchBar from '../Common/TopBar/SearchBar';
+import ButtonPanel from './ButtonPanel';
+import DisplayMenu from './DisplayMenu';
 
 const Containter = styled.div`
     width:1000px;
     background-color:${Colors.white};
-    padding:10px;
+    padding:10px 10px;
 `;
 
 const Menu = styled.div`
     width:100%;
-    height:60px;
+    height:80px;
 `;
 
 const UpMenu = styled.div`
     display:flex;
+    align-items:center;
     justify-content:space-between;
-    height:30px;
-    
+    height:50px;
 `;
 
 const Title = styled.div`
     font-weight:bold;
     color:${Colors.darkBlue};
+    margin-left:10px;
 `;
 
 const TitleImg = styled.img`
     width:14px;
     height:14px;
     margin-left:10px;
-`;
-
-const DisplayFormat = styled.div``;
-const Mosaic = styled.div``;
-const Hamburger = styled.div``;
-
-const CustomSelect = styled.select`
-    height:30px;
-    width:80px;
 `;
 
 const DownMenu = styled.div`
@@ -55,34 +45,40 @@ const DownMenu = styled.div`
     justify-content:space-between;
 `;
 
-const ButtonPanel = styled.div`
+const SearchWrapper = styled.div`
+    width:150px;
+    height:25px;
     display:flex;
     align-items:center;
 `;
 
-const Options = styled.div`
+const CustomSelect = styled.select`
+    height:30px;
+    width:80px;
+`;
+
+const RightPanel = styled.div`
     display:flex;
+    align-items:center;
 `;
 
-const Option = styled.div`
-    color:${Colors.gray};
-    margin-left:10px;
-    padding:2px 2px;
-    border-left:1px solid ${Colors.gray};
-`;
-
-const SearchWrapper = styled.div`
-    width:150px;
-    height: 30px;
+const Wall = styled.div`
+    height:25px;
+    width:1px;
+    background-color: ${Colors.lightGray};
+    margin:0px 20px;
 `;
 
 export const Entities: FC = () =>{
 
     const [inputText, setInputText] = useState<string>('');
+    const [displayStyle, setDisplayStyle] = useState<boolean>(true);
 
     const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setInputText((e.target.value as string).trim().toLocaleLowerCase());
-    }
+    };
+    const displayStyleHanlder = () => setDisplayStyle(!displayStyle);
+    
 
     return(
         <Containter>
@@ -92,32 +88,20 @@ export const Entities: FC = () =>{
                         Entities
                         <TitleImg src={gear}/>
                     </Title>
-                    <DisplayFormat>
-                        <Mosaic/><Hamburger />
-                    </DisplayFormat>
+                    <DisplayMenu onClicked={displayStyleHanlder} mosaic={displayStyle} />
                 </UpMenu>
                 <DownMenu>
-                    <ButtonPanel>
-                        <CustomSelect></CustomSelect>
-                        <Options>
-                            <Option>
-                                <TitleImg src={sort}/>
-                                Sort
-                                <TitleImg src={filter}/>
-                                Filters
-                            </Option>
-                            <Option><TitleImg src={resize}/></Option>
-                            <Option><TitleImg src={share}/>Share</Option>
-                        </Options>
-                    </ButtonPanel>
-
-                    <SearchWrapper>
-                        <input type='text' onChange={inputChangeHandler}/>
-                    </SearchWrapper>
-                   
+                    <ButtonPanel />
+                    <RightPanel>
+                        <SearchWrapper>
+                            <SearchBar searchHandler={inputChangeHandler}/>
+                        </SearchWrapper>
+                            <Wall />
+                        <CustomSelect/>
+                    </RightPanel>
                 </DownMenu>
             </Menu>
-            <EntitiesContainer filter={inputText}/>
+            <EntitiesContainer isMosaic={displayStyle} filter={inputText}/>
         </Containter>
     );
 };

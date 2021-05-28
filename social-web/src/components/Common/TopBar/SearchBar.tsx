@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import styled from 'styled-components';
 
 import searchIcon from '../../../icons/search.svg';
@@ -35,10 +35,14 @@ const SearchInput = styled.input`
     outline: none;
 `;
 
-export const SearchBar: FC = () => {
+interface ISearchBar{
+    searchHandler?: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const SearchBar: FC<ISearchBar> = (props) => {
     return(
         <Search>
-            <SearchInput type="text" placeholder="Search..."></SearchInput>
+            <SearchInput onChange={props.searchHandler} type="text" placeholder="Search..."></SearchInput>
             <Loupe src={searchIcon}/>
         </Search>
     );

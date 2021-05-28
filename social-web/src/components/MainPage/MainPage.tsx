@@ -22,6 +22,8 @@ import { getPosts } from '../../actions/postActions';
 import { Home } from '../Home/Home';
 import { getComments } from '../../actions/commentActions';
 import { Profile } from '../Profile/Profile';
+import Workspace from '../Workspaces/Workspace';
+
 const Content = styled.div`
     display:flex;
     width:100vw;
@@ -87,6 +89,9 @@ export const MainPage: FC = () => {
                             </Route>
                             <Route path="/profile">
                                 <Profile />
+                            </Route>
+                            <Route path="/workspaces/:workspace">
+                                <Workspace />
                             </Route>
                             <Route path="/">
                                 <Home />
