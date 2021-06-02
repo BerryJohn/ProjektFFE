@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {ChangeEvent, FC, useState} from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -10,6 +10,7 @@ import { IUsersReducer } from '../../../reducers/userReducers';
 
 import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
+import SearchBar from '../../Common/TopBar/SearchBar';
 import SingleComment from './SingleComment';
 
 const Title = styled.h1`
@@ -53,24 +54,63 @@ const CustomButton = styled.button`
     }
 `;
 
+const TitleBar = styled.div`
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    max-width:1000px;
+`;
+
+const Filter = styled.div`
+    height:30px;
+    width:200px;
+`;
+
+const CustomSelect = styled.select`
+    margin-left:20px;
+    height:30px;
+    width:120px;
+    font-size:${fontSize[16]};
+    background-color:transparent;
+    outline:none; 
+    box-shadow: none;
+    border:1px solid ${Colors.lightBackground};
+`;
+
 export const AllComments: FC = () =>{
 
+    const [inputText, setInputText] = useState<string>('');
+    const [displayOption, setDisplayOption] = useState<string>('All');
     const [currentPage, setCurrentPage] = useState<number>(0);
 
     const { commentList } = useSelector<IState, ICommentReducer>(globalState => ({
         ...globalState.comments
     }));
+    const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputText((e.target.value as string).trim().toLocaleLowerCase());
+    };
 
     const pages: any[] = [];
-    for(let i = 0; i < commentList.length; i += 10)
+    const tempArr: any[] = commentList.filter(el => el.body.includes(inputText))
+                                      .filter(el => displayOption == 'All' ? el : el.id < 15);
+
+    for(let i = 0; i < tempArr.length; i += 10)
     {
-        pages.push(commentList.slice(i,i+10)); 
+        pages.push(tempArr.slice(i,i+10)); 
     }
     const pageCount:number = pages?.length - 1;
 
     return(
         <>
-            <Title>Resume your work</Title>
+            <TitleBar>
+                <Title>Resume your work</Title>
+                <Filter><SearchBar searchHandler={inputChangeHandler}/></Filter>
+                <CustomSelect value={displayOption} onChange={(e) => setDisplayOption(`${e.target.value}`)}>
+                    <option>All</option>
+                    <option>Followed</option>
+                </CustomSelect>
+            </TitleBar>
+            
             {pages[currentPage]?.map( (e:IComment,index:number) => 
                 (<SingleComment text={e.body} title={e.name} postId={e.postId} key={index}/>)
             )}
@@ -80,7 +120,7 @@ export const AllComments: FC = () =>{
                     () => currentPage > 0 
                         ? setCurrentPage(currentPage - 1) 
                         : setCurrentPage(currentPage)
-                }>Previus</CustomButton>
+                }>Previous</CustomButton>
 
                 { pageCount < 3 
                     ?   pages.map((el,index) => 

@@ -4,12 +4,14 @@ import photos, { IPhotosReducer } from './photoReducers';
 import posts, { IPostReducer } from './postReducers';
 import users, { IUsersReducer } from './userReducers';
 import comments, {ICommentReducer} from './commentReducer';
+import display, {IDisplayReducer} from './displayReducer';
 
 export default combineReducers({
     users,
     photos,
     posts,
-    comments
+    comments,
+    display,
 });
 
 export interface IState {
@@ -17,4 +19,5 @@ export interface IState {
     photos: IPhotosReducer;
     posts: IPostReducer;
     comments: ICommentReducer;
+    display: IDisplayReducer;
 };

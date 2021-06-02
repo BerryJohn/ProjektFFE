@@ -2,12 +2,12 @@ import React, {FC} from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { IWorkspaceData, workspaceData } from '../../tools/workspacesData';
+import AllComments from '../Home/AllComments/AllComments';
 import TipsBar from './TipsBar/TipsBar';
 import WorkspaceBar from './WorkspaceBar/WorkspaceBar';
 
 const Container = styled.div`
     width:1000px;
-    height:1000px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -27,6 +27,7 @@ export const Workspace: FC = () => {
         <Container>
             <WorkspaceBar title={currentPageInfo.name} icon={currentPageInfo.icon}/>
             <TipsBar />
+            <AllComments />
         </Container>
     );
 };

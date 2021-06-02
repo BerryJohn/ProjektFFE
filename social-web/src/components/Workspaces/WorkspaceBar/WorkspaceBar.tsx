@@ -7,7 +7,7 @@ import { fontSize } from '../../../styledHelpers/FontSizes';
 
 const Wrapper = styled.div`
     width:980px;
-    height:250px;
+    height:300px;
     border-radius:2px;
     display:flex;
     flex-direction:column;
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 
 const ImgContainer = styled.img`
     width:100%;
-    height:150px;
+    height:200px;
     object-fit:cover;
 `;
 

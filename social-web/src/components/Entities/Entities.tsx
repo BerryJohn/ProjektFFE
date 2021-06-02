@@ -7,12 +7,15 @@ import gear from '../../icons/gear.svg';
 import SearchBar from '../Common/TopBar/SearchBar';
 import ButtonPanel from './ButtonPanel';
 import DisplayMenu from './DisplayMenu';
+import Filters from './Filters';
+
 
 const Containter = styled.div`
     width:1000px;
     /* width:calc(100vw - 50px); */
     background-color:${Colors.white};
     padding:10px 10px;
+    position: relative;
 `;
 
 const Menu = styled.div`
@@ -75,12 +78,15 @@ export const Entities: FC = () =>{
     const [inputText, setInputText] = useState<string>('');
     const [displayStyle, setDisplayStyle] = useState<boolean>(true);
     const [sortAlphabetic, setSortAlphabetic] = useState<boolean>(true);
+    const [displaySortMenu, setDisplaySortMenu] = useState<boolean>(false);
+    const [displayOption, setDisplayOption] = useState<string>('All');
 
     const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setInputText((e.target.value as string).trim().toLocaleLowerCase());
     };
     const displayStyleHanlder = () => setDisplayStyle(!displayStyle);
     const sortHanlder = () => setSortAlphabetic(!sortAlphabetic);
+    const filterDisplayHandler = () => setDisplaySortMenu(!displaySortMenu);
 
     return(
         <Containter>
@@ -91,19 +97,24 @@ export const Entities: FC = () =>{
                         <TitleImg src={gear}/>
                     </Title>
                     <DisplayMenu onClicked={displayStyleHanlder} mosaic={displayStyle} />
+                    
                 </UpMenu>
                 <DownMenu>
-                    <ButtonPanel onClickSort={sortHanlder}/>
+                    <ButtonPanel onClickSort={sortHanlder} displayFilters={filterDisplayHandler}/>
+                    {displaySortMenu && <Filters />}
                     <RightPanel>
                         <SearchWrapper>
                             <SearchBar searchHandler={inputChangeHandler}/>
                         </SearchWrapper>
                             <Wall />
-                        <CustomSelect/>
+                        <CustomSelect value={displayOption} onChange={(e) => setDisplayOption(`${e.target.value}`)}>
+                            <option>All</option>
+                            <option>Mine</option>
+                        </CustomSelect>
                     </RightPanel>
                 </DownMenu>
             </Menu>
-            <EntitiesContainer sortAlphabetically={sortAlphabetic} isMosaic={displayStyle} filter={inputText}/>
+            <EntitiesContainer displayOption={displayOption} sortAlphabetically={sortAlphabetic} isMosaic={displayStyle} filter={inputText}/>
         </Containter>
     );
 };

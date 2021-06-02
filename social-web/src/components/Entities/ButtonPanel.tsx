@@ -8,6 +8,11 @@ import filter from '../../icons/filter.svg';
 import resize from '../../icons/resize.svg';
 import share from '../../icons/share.svg';
 import more from '../../icons/more.svg';
+import circle from '../../icons/circle.svg';
+import arrow from '../../icons/arrow_down.svg';
+import { useSelector } from 'react-redux';
+import { IState } from '../../reducers';
+import { IDisplayReducer } from '../../reducers/displayReducer';
 
 const Wrapper = styled.div`
     display:flex;
@@ -15,9 +20,24 @@ const Wrapper = styled.div`
     padding:0px 5px;
 `;
 
-const CustomSelect = styled.select`
+const FakeSelect = styled.div`
     height:30px;
     width:80px;
+    background-color:#f0ecf4;
+    border-radius:2px;
+    box-shadow:0px 1px 3px ${Colors.gray};
+    color:${Colors.blue};
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+    cursor:pointer;
+`;
+
+interface ISmallIcon {
+    height:string;
+}
+const SmallIcon = styled.img<ISmallIcon>`
+    height:${props => props.height}px;
 `;
 
 const Options = styled.div`
@@ -60,26 +80,38 @@ const Text = styled.span`
 
 interface IButtonPanel {
     onClickSort():void;
-}
+    displayFilters():void;
+};
 
 export const ButtonPanel: FC<IButtonPanel> = (props) => {
-
+    const { display } = useSelector<IState, IDisplayReducer>(globalState => ({
+        ...globalState.display,
+    }));
+    
     return(
         <Wrapper>
-            <CustomSelect></CustomSelect>
+            <FakeSelect>
+                <SmallIcon height='14' src={circle}/> 
+                All
+                <SmallIcon height='9' src={arrow}/> 
+            </FakeSelect>
             <More src={more}/>
             <Options>
                 <Option onClick={() => props.onClickSort()}>
                     <ImgIcon src={sort}/>
                     <Text>Sort</Text>
                 </Option>
-                <Option>
+                <Option onClick={() => props.displayFilters()}>
                     <ImgIcon src={filter}/>
                     <Text>Filters</Text>
                 </Option>
-                <Option>
+                <Option onClick={() => {
+                    
+                    console.log(display?.display);
+                    
+                }}>
                     <ImgIcon src={resize}/>
-                    </Option>
+                </Option>
                 <Option onClick={() =>  navigator.clipboard.writeText(window.location.href)}>
                     <ImgIcon src={share}/>
                     <Text>Share</Text>

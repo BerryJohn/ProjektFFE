@@ -16,6 +16,7 @@ const Search = styled.div`
     border-radius:2px;
     box-shadow: 0px 0px 4px ${Colors.lightGray};
     overflow:hidden;
+    background-color: ${Colors.white};
 `;
 
 const Loupe = styled.img`
