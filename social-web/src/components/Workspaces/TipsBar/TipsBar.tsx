@@ -63,7 +63,7 @@ export const TipsBar: FC = () => {
             <TipsContainer>
                 <Tip title='Explore your entities' text={defaultText} img={entities}/>
                 <Tip title='Structure the ownership' text={defaultText} img={diagram}/>
-                <Tip title='Fefine the calendar' text={defaultText} img={calendar}/>
+                <Tip title='Define the calendar' text={defaultText} img={calendar}/>
             </TipsContainer>
         </Wrapper>
     );

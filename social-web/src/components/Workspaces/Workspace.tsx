@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { IWorkspaceData, workspaceData } from '../../tools/workspacesData';
-import AllComments from '../Home/AllComments/AllComments';
+import WorkspaceComments from './WorkspaceComments/WorkspaceComments';
 import TipsBar from './TipsBar/TipsBar';
 import WorkspaceBar from './WorkspaceBar/WorkspaceBar';
 
@@ -27,7 +27,7 @@ export const Workspace: FC = () => {
         <Container>
             <WorkspaceBar title={currentPageInfo.name} icon={currentPageInfo.icon}/>
             <TipsBar />
-            <AllComments />
+            <WorkspaceComments />
         </Container>
     );
 };

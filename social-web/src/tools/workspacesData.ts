@@ -50,8 +50,8 @@ export const workspaceData:IWorkspaceData[] = [
         lastUpdate:'16days ago'
     },
     {
-        id:'networkingus',
-        name:'Networking us',
+        id:'networkingUS',
+        name:'Networking US',
         icon:'ecosystem.svg',
         users:64122,
         lastUpdate:'1day ago'
