@@ -1,14 +1,12 @@
 import {FC} from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import { Colors } from '../../../../styledHelpers/Colors';
+import { fontSize } from '../../../../styledHelpers/FontSizes';
 
 import houseImg from '../../../../icons/house.svg';
-import publicationsImg from '../../../../icons/publications.svg';
 import peopleImg from '../../../../icons/people.svg';
-import entitiesImg from '../../../../icons/entities.svg';
-import corporateImg from '../../../../icons/entities2.svg';
-import administrationImg from '../../../../icons/administration.svg';
-import { fontSize } from '../../../../styledHelpers/FontSizes';
 
 const Wrapper = styled.div`
     background-color:${Colors.white};
@@ -53,7 +51,8 @@ const Title = styled.span`
 `;
 
 const Info = styled.div`
-    margin-top:10px;    
+    margin-top:10px;
+    margin-left:10px;   
     display:flex;
     align-items:center;
     margin-bottom:10px;
@@ -62,6 +61,7 @@ const Info = styled.div`
 const SmallImg = styled.img`
     width:20px;
     height:20px;
+    margin-right:5px;
 `;
 
 const UserCount = styled.span``;
@@ -70,28 +70,49 @@ const LastUpdate = styled.div`
     font-size:${fontSize[12]};
     color:${Colors.gray};
     letter-spacing:.4px;
+    margin-left:10px;   
 `;
 
-const img: string = 'https://www.wykop.pl/cdn/c3201142/comment_1607629874cgZhlZgfQx7VMaGz3HNSBK.jpg'
+const Space = styled.span`
+    margin:0 5px;
+`;
 
-export const SingleWorkspace: FC = () =>{
+const CustomLink = styled(Link)`
+    text-decoration: none;
+    color:${Colors.black};
+`;
+
+const img: string = 'https://st.depositphotos.com/1743476/1224/i/950/depositphotos_12243165-stock-photo-business-handshake-to-seal-a.jpg'
+
+interface ISingleWorkspace{
+    title:string;
+    img:string;
+    lastUpdate:string;
+    users:number;
+    linkTo:string;
+}
+
+export const SingleWorkspace: FC<ISingleWorkspace> = (props) =>{
+    const workImg = `../../../../icons/${props.img}`
     return(
         <Wrapper>
-            <BackgroundImage src={img}/>
-            <ImgTitleContainter>
-                <IconWrapper src={houseImg}/>
-                <Title>Jakis fajny tytuł</Title>
-            </ImgTitleContainter>
-            <Info>
-                <SmallImg src={houseImg}/>
-                Contract
-                •
-                <SmallImg src={peopleImg}/>
-                <UserCount> 150 users</UserCount>
-            </Info>
-            <LastUpdate>
-                Last update 2137days ago
-            </LastUpdate>
+            <CustomLink to={props.linkTo}>
+                <BackgroundImage src={img}/>
+                <ImgTitleContainter>
+                    <IconWrapper src={workImg}/>
+                    <Title>{props.title}</Title>
+                </ImgTitleContainter>
+                <Info>
+                    <SmallImg src={houseImg}/>
+                    Contract
+                    <Space>•</Space>
+                    <SmallImg src={peopleImg}/>
+                    <UserCount> {props.users} users</UserCount>
+                </Info>
+                <LastUpdate>
+                    Last update {props.lastUpdate}
+                </LastUpdate>
+            </CustomLink>
         </Wrapper>
     );
 }

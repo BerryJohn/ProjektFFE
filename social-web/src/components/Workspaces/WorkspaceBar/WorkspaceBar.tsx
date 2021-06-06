@@ -68,12 +68,13 @@ interface IWorkspaceBar {
     icon: string;
 }
 
+const bgImg: string = 'https://www.softwareone.com/-/media/global/social-media-and-blog/hero/publisher-advisory_get-ready-for-the-office-2010-end-of-support-header.jpg?rev=5496ff43323143be831b8a7922711cf2&sc_lang=en-fi&hash=A250C8730555358AEFE638574FCA0AF4';
+
 export const WorkspaceBar: FC<IWorkspaceBar> = (props) => {
 
-    
     return(
         <Wrapper>
-            <ImgContainer src='https://static2.cs-bg.net/maps/images/screenshots/maps16/cs/cs-2659-cs_office32-3.jpg'/>
+            <ImgContainer src={bgImg}/>
             <Body>
                 <BodyIcon src={`../../../icons/${props.icon}`}/>
                 <BodyText>

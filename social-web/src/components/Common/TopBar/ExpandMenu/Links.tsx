@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Colors } from '../../../../styledHelpers/Colors';
 import { fontSize } from '../../../../styledHelpers/FontSizes';
 
+
 import ExpandMenuLink from './Buttons/ExpandMenuLink';
 
 import houseImg from '../../../../icons/house2.svg';
@@ -50,18 +51,14 @@ export const Links: FC<ILinks> = (props) => {
                 <ExpandMenuLink onClick={closeDropMenu}  title={"Administration"} imgSrc={administrationImg} linkTo="/administration"/>}
                 {props.filterValue.length == 0 &&
                 <SubMenuTitle> Workspaces</SubMenuTitle>}
-                {'client contract'.includes(props.filterValue) &&
-                <ExpandMenuLink 
-                    onClick={closeDropMenu}  title={"Client contract"} 
-                    imgName={workspaceData.filter(el => el.id == `clientContract`)[0].icon} linkTo="/workspaces/clientContract"/>}
-                {'supplier contract'.includes(props.filterValue) &&
-                <ExpandMenuLink onClick={closeDropMenu}  title={"Supplier contract"} imgSrc={houseImg} linkTo="/workspaces/supplierContract"/>}
-                {'corporate'.includes(props.filterValue) &&
-                <ExpandMenuLink onClick={closeDropMenu}  title={"Corporate"} imgSrc={corporateImg} linkTo="/workspaces/corporate"/>}
-                {'group norms'.includes(props.filterValue) &&
-                <ExpandMenuLink onClick={closeDropMenu}  title={"Group Norms"} imgSrc={houseImg} linkTo="/workspaces/groupNorms"/>}
-                {'real estate contracts'.includes(props.filterValue) &&
-                <ExpandMenuLink onClick={closeDropMenu}  title={"Real estate contracts"} imgSrc={houseImg} linkTo="/workspaces/realEstateContracts"/>}
+                {workspaceData.map(workspace => {
+                    if(workspace.name.toLocaleLowerCase().includes(props.filterValue))
+                        return (<ExpandMenuLink 
+                                onClick={closeDropMenu}  
+                                title={workspace.name} 
+                                imgName={workspaceData.filter(el => el.id == workspace.id)[0].icon} 
+                                linkTo={`/workspaces/${workspace.id}`}
+                                />)})}
         </LinksBody>
     );
 };

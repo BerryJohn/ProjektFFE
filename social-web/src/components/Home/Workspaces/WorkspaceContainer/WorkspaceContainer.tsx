@@ -1,6 +1,8 @@
 import {FC} from 'react';
 import styled from 'styled-components';
 
+import data from '../../../../tools/workspacesData';
+
 import SingleWorkspace from './SingleWorkspace';
 
 import SwiperCore, { Navigation, Pagination, Autoplay} from 'swiper';
@@ -19,30 +21,11 @@ export const WorkspaceContainer: FC = () =>{
     return(
         <Containter>
             <CustomSwiper slidesPerView={3} spaceBetween={-10}>  
-                <SwiperSlide>
-                    <SingleWorkspace/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <SingleWorkspace/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <SingleWorkspace/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <SingleWorkspace/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <SingleWorkspace/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <SingleWorkspace/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <SingleWorkspace/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <SingleWorkspace/>
-                </SwiperSlide>
+                {data.map(el => (
+                    <SwiperSlide>
+                        <SingleWorkspace title={el.name} img={el.icon} users={el.users} lastUpdate={el.lastUpdate} linkTo={`/workspaces/${el.id}`}/>
+                    </SwiperSlide>
+                ))}
             </CustomSwiper>
         </Containter>
     );
