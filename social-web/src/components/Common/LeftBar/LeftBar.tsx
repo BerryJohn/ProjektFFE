@@ -11,8 +11,13 @@ import { Publications } from './LinksShortcut/Publications';
 import { EcoSystem } from './LinksShortcut/Ecosystem';
 import { Entities } from './LinksShortcut/Entities';
 import { QuickUserInfo } from './QuickUserInfo';
+import { IDisplayState } from '../../../reducers/displayReducer';
 
-const Bar = styled.div`
+interface IBar {
+    hidden:boolean;
+}
+
+const Bar = styled.div<IBar>`
     min-width:300px;
     max-width:300px;
     height:500px;
@@ -20,6 +25,8 @@ const Bar = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 0px 5px;
+    ${props => (props.hidden && 'transform: translateX(-300px)')};
+    transition:.1s;
 `;
 
 const Links = styled.div`
@@ -30,13 +37,14 @@ const Links = styled.div`
 
 export const LeftBar: FC = () => {
 
-    const { photoList, currentUser } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState => ({
+    const { photoList, currentUser, isFullscreen } = useSelector<IState, IUsersReducer & IPhotosReducer & IDisplayState>(globalState => ({
         ...globalState.users,
         ...globalState.photos,
+        ...globalState.display
     }));
     
     return(
-        <Bar>
+        <Bar hidden={isFullscreen}>
             <QuickUserInfo userAvatar={photoList?.filter(el => el?.id === currentUser?.id)[0]?.url} userName={currentUser?.name} userCompany={currentUser?.company?.name}/>
             <Links>
                 <Publications />

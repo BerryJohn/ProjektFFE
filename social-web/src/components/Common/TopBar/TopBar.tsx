@@ -21,10 +21,13 @@ import { useSelector } from 'react-redux';
 import { IState } from '../../../reducers';
 import { IUsersReducer } from '../../../reducers/userReducers';
 import { IPhotosReducer } from '../../../reducers/photoReducers';
+import { IDisplayState } from '../../../reducers/displayReducer';
 
+interface IBar {
+    hidden:boolean;
+}
 
-
-const Bar = styled.div`
+const Bar = styled.div<IBar>`
     width:100vw;
     min-height:50px;
     max-height:50px;
@@ -34,6 +37,8 @@ const Bar = styled.div`
     justify-content: space-between;
     box-shadow: 1px 0px 4px ${Colors.lightGray};
     position:sticky;
+    ${props => (props.hidden && 'transform: translateY(-50px)')};
+    transition:.1s;
 `;
 
 const RightButtonSet = styled.div`
@@ -76,11 +81,12 @@ const SearchWrapper = styled.div`
 
 export const TopBar: FC = props => {
 
-    const { usersList, photoList, currentUser } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState => ({
+    const { usersList, photoList, currentUser, isFullscreen } = useSelector<IState, IUsersReducer & IPhotosReducer & IDisplayState>(globalState => ({
         ...globalState.users,
         ...globalState.photos,
+        ...globalState.display
     }));
-
+    
     const [wrapperRef, dropdownOpen, toggleDropdown, closeDropdown] = useDropdown();
     
     const menuHandler = () => {
@@ -91,7 +97,7 @@ export const TopBar: FC = props => {
     }
     
     return(
-        <Bar>
+        <Bar hidden={isFullscreen}>
             <LeftButtonSet>
                 <Link to='/'>
                     <Logo>

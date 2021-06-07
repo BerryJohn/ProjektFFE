@@ -8,14 +8,21 @@ import SearchBar from '../Common/TopBar/SearchBar';
 import ButtonPanel from './ButtonPanel';
 import DisplayMenu from './DisplayMenu';
 import Filters from './Filters';
+import { useSelector } from 'react-redux';
+import { IState } from '../../reducers';
 
 
-const Containter = styled.div`
+interface IContainer {
+    wide:boolean;
+}
+
+const Containter = styled.div<IContainer>`
     width:1000px;
-    /* width:calc(100vw - 50px); */
     background-color:${Colors.white};
     padding:10px 10px;
     position: relative;
+    ${props => (props.wide && 'width:95vw; transform: translateY(-50px)')};
+    transition:.1s;
 `;
 
 const Menu = styled.div`
@@ -77,6 +84,8 @@ const Wall = styled.div`
 
 export const Entities: FC = () =>{
 
+    const isFullscreen = useSelector<IState, boolean>(globalState => (globalState.display.isFullscreen));
+
     const [inputText, setInputText] = useState<string>('');
     const [displayStyle, setDisplayStyle] = useState<boolean>(true);
     const [sortAlphabetic, setSortAlphabetic] = useState<boolean>(true);
@@ -91,7 +100,7 @@ export const Entities: FC = () =>{
     const filterDisplayHandler = () => setDisplaySortMenu(!displaySortMenu);
 
     return(
-        <Containter>
+        <Containter wide={isFullscreen}>
             <Menu>
                 <UpMenu>
                     <Title>

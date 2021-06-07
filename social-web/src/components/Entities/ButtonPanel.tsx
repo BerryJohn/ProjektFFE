@@ -10,9 +10,10 @@ import share from '../../icons/share.svg';
 import more from '../../icons/more.svg';
 import circle from '../../icons/circle.svg';
 import arrow from '../../icons/arrow_down.svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IState } from '../../reducers';
-import { IDisplayReducer } from '../../reducers/displayReducer';
+import { IDisplayState } from '../../reducers/displayReducer';
+import { IDisplayTypes } from '../../actions/actionTypes/displayTypes';
 
 const Wrapper = styled.div`
     display:flex;
@@ -84,9 +85,8 @@ interface IButtonPanel {
 };
 
 export const ButtonPanel: FC<IButtonPanel> = (props) => {
-    const { display } = useSelector<IState, IDisplayReducer>(globalState => ({
-        ...globalState.display,
-    }));
+    const dispatch = useDispatch();
+    const isFullscreen = useSelector<IState, boolean>(globalState => (globalState.display.isFullscreen));
     
     return(
         <Wrapper>
@@ -106,9 +106,8 @@ export const ButtonPanel: FC<IButtonPanel> = (props) => {
                     <Text>Filters</Text>
                 </Option>
                 <Option onClick={() => {
-                    
-                    console.log(display?.display);
-                    
+                    dispatch({type: IDisplayTypes.TOGGLE_FULLSCREEN});
+                    console.log(isFullscreen);           
                 }}>
                     <ImgIcon src={resize}/>
                 </Option>
