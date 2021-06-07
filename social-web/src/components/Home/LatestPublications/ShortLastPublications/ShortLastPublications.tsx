@@ -27,6 +27,7 @@ const Title = styled.div`
 const MorePublications = styled.div`
     color: ${Colors.blue};
     font-size: ${fontSize[18]};
+    cursor: pointer;
 `;
 
 const Shorts = styled.div`

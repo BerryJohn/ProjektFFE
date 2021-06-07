@@ -12,6 +12,8 @@ import SearchBar from '../../Common/TopBar/SearchBar';
 import SingleComment from './SingleComment';
 import FilterOption from './FilterOption';
 
+import signal from '../../../icons/signal.svg';
+
 const Title = styled.h1`
     font-size: ${fontSize[20]};
     color: ${Colors.darkBlue};
@@ -66,15 +68,28 @@ const Filter = styled.div`
 `;
 
 const CustomSelect = styled.select`
-    margin-left:20px;
     height:30px;
-    width:120px;
+    width:90px;
     font-size:${fontSize[16]};
     background-color:transparent;
     outline:none; 
     box-shadow: none;
     border:1px solid ${Colors.lightBackground};
+    color:${Colors.blue};
 `;
+
+const SmallIcon = styled.img`
+    height:20px;
+    width:20px;
+`;
+
+const SelectCont = styled.div`
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-left:20px;
+`;
+
 
 const FilterBar = styled.div`
     width:100%;
@@ -95,6 +110,7 @@ export const WorkspaceComments: FC = () =>{
     }));
     const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setInputText((e.target.value as string).trim().toLocaleLowerCase());
+        setCurrentPage(0);
     };
 
     const pages: any[] = [];
@@ -112,10 +128,13 @@ export const WorkspaceComments: FC = () =>{
             <TitleBar>
                 <Title>Resume your work</Title>
                 <Filter><SearchBar searchHandler={inputChangeHandler}/></Filter>
-                <CustomSelect value={displayOption} onChange={(e) => setDisplayOption(`${e.target.value}`)}>
-                    <option>All</option>
-                    <option>Followed</option>
-                </CustomSelect>
+                <SelectCont>
+                <SmallIcon src={signal}/>
+                    <CustomSelect value={displayOption} onChange={(e) => setDisplayOption(`${e.target.value}`)}>
+                        <option>All</option>
+                        <option>Followed</option>
+                    </CustomSelect>
+                </SelectCont>
                 
             </TitleBar>
             <FilterBar>

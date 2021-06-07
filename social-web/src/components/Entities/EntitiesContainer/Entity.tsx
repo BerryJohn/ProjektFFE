@@ -47,7 +47,8 @@ const Title = styled.span`
     color:${Colors.blue};
     word-wrap: break-word;
     text-overflow:ellipsis;
-    overflow: hidden;
+    overflow: hidden;   
+    box-sizing:border-box;
 `;
 
 const SubText = styled.span`

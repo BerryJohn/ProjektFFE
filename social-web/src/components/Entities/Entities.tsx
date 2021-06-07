@@ -59,6 +59,8 @@ const SearchWrapper = styled.div`
 const CustomSelect = styled.select`
     height:30px;
     width:80px;
+    outline:none;
+    border:1px solid ${Colors.white};
 `;
 
 const RightPanel = styled.div`

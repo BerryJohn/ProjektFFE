@@ -12,6 +12,7 @@ const MenuButton = styled.button`
     background-color: transparent;
     border:none;
     outline: none;
+    cursor: pointer;
 `;
 
 const ImageSelector = styled.img`

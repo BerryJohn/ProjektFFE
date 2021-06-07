@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Colors } from '../../../../styledHelpers/Colors';
 import { fontSize } from '../../../../styledHelpers/FontSizes';
 
-import houseImg from '../../../../icons/house.svg';
 import peopleImg from '../../../../icons/people.svg';
 
 const Wrapper = styled.div`
@@ -48,6 +47,7 @@ const Title = styled.span`
     padding-top:5px;
     font-size:${fontSize[18]};
     color:${Colors.darkBlue};
+    font-weight:bold;
 `;
 
 const Info = styled.div`
@@ -56,6 +56,7 @@ const Info = styled.div`
     display:flex;
     align-items:center;
     margin-bottom:10px;
+    color:${Colors.gray};
 `;
 
 const SmallImg = styled.img`
@@ -74,7 +75,7 @@ const LastUpdate = styled.div`
 `;
 
 const Space = styled.span`
-    margin:0 5px;
+    margin:0 15px;
 `;
 
 const CustomLink = styled(Link)`
@@ -103,7 +104,7 @@ export const SingleWorkspace: FC<ISingleWorkspace> = (props) =>{
                     <Title>{props.title}</Title>
                 </ImgTitleContainter>
                 <Info>
-                    <SmallImg src={houseImg}/>
+                    <SmallImg src={workImg}/>
                     Contract
                     <Space>•</Space>
                     <SmallImg src={peopleImg}/>
