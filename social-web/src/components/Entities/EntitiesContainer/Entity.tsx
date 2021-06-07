@@ -69,18 +69,35 @@ interface IEntity{
     isMosaic:boolean;
 }
 
-export const Entity: FC<IEntity> = (props) => {
-    return(
-        <Wrapper isMosaic={props?.isMosaic}>
+
+export class Entity extends React.Component<IEntity> {
+    render(){
+        return(
+        <Wrapper isMosaic={this.props?.isMosaic}>
             <ImageCont>
-                <Image src={props?.photo}></Image>
+                <Image src={this.props?.photo}></Image>
             </ImageCont>
             <Data>
-                <Title>{props?.title}</Title>
-                <SubText>{props?.subtext}</SubText>
+                <Title>{this.props?.title}</Title>
+                <SubText>{this.props?.subtext}</SubText>
             </Data>
         </Wrapper>
-    );
+        )
+    }
 }
+
+// export const Entity: FC<IEntity> = (props) => {
+//     return(
+//         <Wrapper isMosaic={props?.isMosaic}>
+//             <ImageCont>
+//                 <Image src={props?.photo}></Image>
+//             </ImageCont>
+//             <Data>
+//                 <Title>{props?.title}</Title>
+//                 <SubText>{props?.subtext}</SubText>
+//             </Data>
+//         </Wrapper>
+//     );
+// }
 
 export default Entity;
