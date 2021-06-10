@@ -83,10 +83,10 @@ export const MainPage: FC = () => {
                                 <Entities />
                             </Route>
                             <Route path="/people">
-                                <Entities />
+                                <Home />
                             </Route>
                             <Route path="/administration">
-                                <Entities />
+                                <Home />
                             </Route>
                             <Route path="/profile">
                                 <Profile />
