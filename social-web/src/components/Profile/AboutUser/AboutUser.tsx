@@ -2,7 +2,10 @@ import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { UserFunction } from './UserFunctions';
 
-import plus from '../../../icons/plus.svg';
+import message from '../../../icons/speech-bubble.svg';
+import briefcase from '../../../icons/briefcase.svg';
+import request from '../../../icons/request.svg';
+
 import pen from '../../../icons/pen.svg';
 import { Colors } from '../../../styledHelpers/Colors';
 import { useSelector } from 'react-redux';
@@ -13,10 +16,10 @@ import { CustomInput } from '../../../styledHelpers/Components';
 
 const Wrapper = styled.div`
     width:100%;
-    height:130px;
+    height:140px;
     display:flex;
     flex-direction:column;
-    padding:10px;
+    padding:10px 30px;
     box-sizing:border-box;
     border-bottom:1px solid ${Colors.lightBackground};
     position: relative;
@@ -30,7 +33,6 @@ const AvatarSection = styled.div`
     display:flex;
     flex-direction:column;
     height:100px;
-    /* padding:5px; */
 `;
 
 const UserAvatar = styled.img`
@@ -39,6 +41,9 @@ const UserAvatar = styled.img`
     border-radius:75px;
 `;
 const UserAvatarText = styled.span`
+    margin-top:5px;
+    color:${Colors.blue};
+    cursor:pointer;
 `;
 
 const UserSection = styled.div`
@@ -96,16 +101,6 @@ const CustomInputUser = styled(CustomInput)`
     }
 `;
 
-interface IAboutUser{
-    name:string;
-    userName:string;
-    email:string;
-    city:string;
-    phone:string;
-    companyName:string;
-    avatar:string;
-}
-
 export const AboutUser: FC = () =>{
 
     const { currentUser, photoList } = useSelector<IState, IUsersReducer & IPhotosReducer>(globalState =>({
@@ -142,9 +137,9 @@ export const AboutUser: FC = () =>{
         <Wrapper>
             <EditButton onClick={() => handleSubmit()}><ButtonImg src={pen}/></EditButton>
             <FunctionSection>
-                    <UserFunction text="Message" icon={plus}/>
-                    <UserFunction text="Create a request" icon={plus}/>
-                    <UserFunction text="Add to cluster" icon={plus}/>
+                    <UserFunction text="Message" icon={message}/>
+                    <UserFunction text="Create a request" icon={request}/>
+                    <UserFunction text="Add to cluster" icon={briefcase}/>
             </FunctionSection>
             <UserSection>
                 <AvatarSection>

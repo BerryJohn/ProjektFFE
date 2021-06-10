@@ -24,7 +24,7 @@ export const CircleNotify = styled.div`
 `;
 
 export const LeftBarLink = styled.div`
-    margin-top:10px;
+    margin:10px 0px;
     height:30px;
     display:flex;
     font-size: ${fontSize[16]};

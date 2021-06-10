@@ -69,7 +69,6 @@ interface IEntity{
     isMosaic:boolean;
 }
 
-
 export class Entity extends React.Component<IEntity> {
     render(){
         return(
@@ -84,20 +83,6 @@ export class Entity extends React.Component<IEntity> {
         </Wrapper>
         )
     }
-}
-
-// export const Entity: FC<IEntity> = (props) => {
-//     return(
-//         <Wrapper isMosaic={props?.isMosaic}>
-//             <ImageCont>
-//                 <Image src={props?.photo}></Image>
-//             </ImageCont>
-//             <Data>
-//                 <Title>{props?.title}</Title>
-//                 <SubText>{props?.subtext}</SubText>
-//             </Data>
-//         </Wrapper>
-//     );
-// }
+};
 
 export default Entity;

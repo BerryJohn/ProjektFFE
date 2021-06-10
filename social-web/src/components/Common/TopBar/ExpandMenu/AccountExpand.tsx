@@ -1,4 +1,5 @@
 import {FC} from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { Colors } from '../../../../styledHelpers/Colors';
@@ -43,6 +44,11 @@ const AccountInfo = styled.div`
     border-top:1px solid ${Colors.lightGray};
 `;
 
+const CustomLink = styled(Link)`
+    text-decoration: none;
+    color:${Colors.black};
+`;
+
 interface IAccountExpand{
     closeDropdown(): void;
     currentUser: ISingleUser;
@@ -60,15 +66,17 @@ export const AccountExpand: FC<IAccountExpand> = (props) => {
             <SubMenuTitle>
                 Account
             </SubMenuTitle>
-            <Account>
-                <UserAvatar src={props?.userPhoto}/>
-                <UserInfo>
-                    <span>{props?.currentUser?.name}</span>
-                    <UserLink>See more</UserLink>
-                </UserInfo>
-            </Account>
+            <CustomLink to={'/profile'} onClick={closeDropMenu}>
+                <Account>
+                    <UserAvatar src={props?.userPhoto}/>
+                    <UserInfo>
+                        <span>{props?.currentUser?.name}</span>
+                        <UserLink>See more</UserLink>
+                    </UserInfo>
+                </Account>
+            </CustomLink>
             <ExpandMenuLink title="Privacy" imgSrc={privacyImg} linkTo="/" onClick={closeDropMenu}></ExpandMenuLink>
-                <ExpandMenuLink title="Settings" imgSrc={settingsImg} linkTo="/profile" onClick={closeDropMenu}></ExpandMenuLink>
+            <ExpandMenuLink title="Settings" imgSrc={settingsImg} linkTo="/" onClick={closeDropMenu}></ExpandMenuLink>
         </AccountInfo>
     );
 };
